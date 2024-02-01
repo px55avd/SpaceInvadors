@@ -1,0 +1,8 @@
+D:\P_progCheneau\SpaceInvaders\bin\Debug\SpaceInvaders.exe.config
+D:\P_progCheneau\SpaceInvaders\bin\Debug\SpaceInvaders.exe
+D:\P_progCheneau\SpaceInvaders\bin\Debug\SpaceInvaders.pdb
+D:\P_progCheneau\SpaceInvaders\obj\Debug\SpaceInvaders.csproj.AssemblyReference.cache
+D:\P_progCheneau\SpaceInvaders\obj\Debug\SpaceInvaders.csproj.SuggestedBindingRedirects.cache
+D:\P_progCheneau\SpaceInvaders\obj\Debug\SpaceInvaders.csproj.CoreCompileInputs.cache
+D:\P_progCheneau\SpaceInvaders\obj\Debug\SpaceInvaders.exe
+D:\P_progCheneau\SpaceInvaders\obj\Debug\SpaceInvaders.pdb
