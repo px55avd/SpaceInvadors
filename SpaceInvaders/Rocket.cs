@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Drawing;
+
 
 
 
@@ -52,11 +54,14 @@ namespace SpaceInvaders
                     // Désactive le missile s'il sort de l'écran
                     IsActive = false;
                 }
-
             }
+        }
 
-
-
+        // Méthode pour obtenir la hitbox du missile
+        public Rectangle GetHitbox()
+        {
+            // Retourne un rectangle autour du missile pour détecter les collisions
+            return new Rectangle(X, Y, 1, 1); // Modifier les dimensions selon la taille du missile
         }
 
         // Méthode Draw : dessine le missile à sa position actuelle sur la console

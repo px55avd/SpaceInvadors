@@ -13,6 +13,8 @@ namespace SpaceInvaders
     // Classe Player : représente le joueur dans le jeu SpaceInvaders
     internal class Player
     {
+        
+
         // Propriété X : position horizontale du joueur
         public int X { get; private set; }
         // Propriété Y : position verticale du joueur

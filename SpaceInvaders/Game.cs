@@ -9,85 +9,84 @@ namespace SpaceInvaders
 {
     internal class Game
     {
-        private int playerPosition;
-        private bool gameOver;
-        private int score;
-        private List<Invader> invaders;
-        private Player player;
-        private List<Rocket> rockets;
+        // Déclaration des champs de la classe
+        private int playerPosition; // Position du joueur
+        private bool gameOver; // Indique si le jeu est terminé
+        private int score; // Score du joueur
+        private List<Invader> invaders; // Liste des envahisseurs
+        private Player player; // Le joueur
+        private List<Rocket> rockets; // Liste des missiles tirés par le joueur
 
+        // Constructeur de la classe Game
         public Game()
         {
+            // Initialise les champs
             playerPosition = Console.WindowWidth / 2;
             gameOver = false;
             score = 0;
             invaders = new List<Invader>();
             player = new Player(playerPosition);
             rockets = new List<Rocket>();
-            InitializeInvaders();
+            InitializeInvaders(); // Initialise les envahisseurs
         }
 
+        // Méthode pour démarrer le jeu
         public void Start()
         {
+            // Crée un thread pour gérer la saisie utilisateur
             Thread userInputThread = new Thread(UserInput);
             userInputThread.Start();
 
+            // Boucle principale du jeu
             while (!gameOver)
             {
-                Update();
-                Draw();
-                Thread.Sleep(50);
+                Update(); // Met à jour l'état du jeu
+                Draw(); // Dessine les éléments du jeu sur la console
+                Thread.Sleep(50); // Pause pour contrôler la vitesse du jeu
             }
 
+            // Affiche un message de fin de jeu lorsque le jeu est terminé
             Console.SetCursorPosition(0, Console.WindowHeight - 1);
             Console.WriteLine("Game Over! Press any key to exit...");
             Console.ReadKey();
         }
 
+        // Méthode pour mettre à jour l'état du jeu
         private void Update()
         {
+
             foreach (Invader invader in invaders)
             {
                 invader.Move();
-                if (invader.Y == Console.WindowHeight - 1)
+                foreach (Rocket rocket in rockets)
                 {
-                    gameOver = true;
-                    break;
-                }
-            }
-
-            foreach (Invader invader in invaders)
-            {
-                if (invader.Y == Console.WindowHeight - 1)
-                {
-                    gameOver = true;
-                    break;
-                }
-                if (invader.X == playerPosition && invader.Y == Console.WindowHeight - 2)
-                {
-                    gameOver = true;
-                    break;
-                }
-            }
-
-            foreach (Rocket rocket in rockets)
-            {
-                rocket.Move();
-
-                foreach (Invader invader in invaders)
-                {
-                    if (rocket.X == invader.X && rocket.Y == invader.Y)
+                    
+                    // Vérifie si la hitbox du missile entre en collision avec la hitbox de l'envahisseur
+                    if (rocket.GetHitbox().IntersectsWith(invader.GetHitbox()))
                     {
-                        invader.Reset();
-                        score++;
-                        rocket.IsActive = false;
+                        invader.Reset(); // Réinitialise l'envahisseur
+                        score++; // Incrémente le score
+                        rocket.IsActive = false; // Désactive le missile
                     }
                 }
+                if (invader.Y == Console.WindowHeight - 1)
+                {
+                    gameOver = true;
+                    break;
+                }
+
+                //Déplacement des missiles
+                foreach (Rocket rocket in rockets)
+                {
+                    rocket.Move();//Déplace le missile 
+                }
+
             }
 
-            score++;
+            score++; // Augmente le score à chaque mise à jour
         }
 
+        // Méthode pour dessiner les éléments du jeu sur la console
         private void Draw()
         {
             // Efface le contenu actuel de la console
@@ -96,7 +95,7 @@ namespace SpaceInvaders
             // Dessine le joueur
             player.Draw();
 
-            // Parcourt la liste des envahisseurs et les dessine
+            // Dessine les envahisseurs
             foreach (Invader invader in invaders)
             {
                 invader.Draw();
@@ -105,7 +104,7 @@ namespace SpaceInvaders
             // Crée une copie de la liste des missiles pour éviter les modifications concurrentes
             List<Rocket> rocketsCopy = new List<Rocket>(rockets);
 
-            // Parcourt la copie de la liste des missiles et les dessine
+            // Dessine les missiles
             foreach (Rocket rocket in rocketsCopy)
             {
                 rocket.Draw();
@@ -115,8 +114,7 @@ namespace SpaceInvaders
             DrawScore();
         }
 
-
-
+        // Méthode pour dessiner le score du joueur sur la console
         private void DrawScore()
         {
             Console.SetCursorPosition(0, 0);
@@ -124,6 +122,9 @@ namespace SpaceInvaders
             Console.Write($"Score: {score}");
         }
 
+        /// <summary>
+        /// Méthode pour gérer la saisie utilisateur
+        /// </summary>
         private void UserInput()
         {
             while (!gameOver)
@@ -150,10 +151,10 @@ namespace SpaceInvaders
             }
         }
 
+        // Méthode pour initialiser les envahisseurs du jeu
         private void InitializeInvaders()
         {
-            // Add initial invaders
-            // For simplicity, we'll add one invader for now
+            // Ajoute un envahisseur initial
             invaders.Add(new Invader(Console.WindowWidth / 2, 5));
         }
     }

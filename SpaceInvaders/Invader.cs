@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Drawing;
 
 // Espace de noms SpaceInvaders
 namespace SpaceInvaders
@@ -11,8 +12,8 @@ namespace SpaceInvaders
     // Classe Invader : représente un envahisseur dans le jeu SpaceInvaders
     internal class Invader
     {
-        Random random = new Random(Console.WindowWidth);
-        Random random2 = new Random(Console.WindowHeight);
+        Random random = new Random();
+ 
 
         // Propriété X : position horizontale de l'envahisseur
         public int X { get; private set; }
@@ -29,13 +30,12 @@ namespace SpaceInvaders
         // Initialise la position horizontale et verticale de l'envahisseur
         public Invader(int initialX, int initialY)
         {
-            X = initialX;
-            Y = initialY;
+            this.initialX = random.Next(initialX);
+            this.initialY = random.Next(initialY);
 
-            initialY = random2.Next(Y);
-            initialX = random2.Next(X);
-            this.initialX = initialX;
-            this.initialY = initialY;
+
+            X = this.initialX = initialX;
+            Y = this.initialY = initialY;
         }
 
         // Méthode Move : déplace l'envahisseur vers le bas (dans le sens de Y)
@@ -58,6 +58,14 @@ namespace SpaceInvaders
             Console.Write("X");
 
 
+        }
+
+
+        // Méthode pour obtenir la hitbox de l'envahisseur
+        public Rectangle GetHitbox()
+        {
+            // Retourne un rectangle autour de l'envahisseur pour détecter les collisions
+            return new Rectangle(X, Y, 1, 1); // Modifier les dimensions selon la taille de l'envahisseur
         }
 
 
