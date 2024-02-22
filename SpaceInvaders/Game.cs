@@ -54,13 +54,11 @@ namespace SpaceInvaders
         // Méthode pour mettre à jour l'état du jeu
         private void Update()
         {
-
             foreach (Invader invader in invaders)
             {
                 invader.Move();
                 foreach (Rocket rocket in rockets)
                 {
-                    
                     // Vérifie si la hitbox du missile entre en collision avec la hitbox de l'envahisseur
                     if (rocket.GetHitbox().IntersectsWith(invader.GetHitbox()))
                     {
@@ -80,7 +78,6 @@ namespace SpaceInvaders
                 {
                     rocket.Move();//Déplace le missile 
                 }
-
             }
 
             score++; // Augmente le score à chaque mise à jour

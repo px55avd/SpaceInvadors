@@ -20,11 +20,8 @@ namespace SpaceInvaders
         // Propriété Y : position verticale de l'envahisseur
         public int Y { get; private set; }
 
-
         private int initialX;
         private int initialY;
-
-
 
         // Constructeur de la classe Invader
         // Initialise la position horizontale et verticale de l'envahisseur
@@ -74,6 +71,9 @@ namespace SpaceInvaders
         {
             X = initialX;
             Y = initialY;
+            this.initialX = random.Next(initialX);
+            this.initialY = random.Next(initialY);
+
 
         }
     }

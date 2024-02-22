@@ -8,12 +8,13 @@ using SpaceInvaders;
 
 [assembly: InternalsVisibleToAttribute("Game")]
 
-// Espace de noms SpicyInvader
+// Espace de noms SpicyInva der
 namespace SpicyInvader
 {
     // Classe Program : Point d'entrée du programme
     internal class Program
     {
+        [STAThread] 
         // Méthode principale du programme
         static void Main(string[] args)
         {

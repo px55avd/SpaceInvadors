@@ -42,7 +42,7 @@ namespace SpaceInvaders
             Console.SetCursorPosition(X, Y);
             // Définit la couleur du texte pour représenter le joueur
             Console.ForegroundColor = ConsoleColor.Green;
-            // Affiche le joueur comme un caractère '^'
+            // Affiche le joueur comme une chaîne de caractère "<O>"
             Console.Write("<O>");
         }
     }
