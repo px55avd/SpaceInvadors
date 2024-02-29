@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 using SpaceInvaders;
+using System.Threading;
+using System.Windows.Input;
 
 [assembly: InternalsVisibleToAttribute("Game")]
 
@@ -14,8 +16,9 @@ namespace SpicyInvader
     // Classe Program : Point d'entrée du programme
     internal class Program
     {
-        [STAThread] 
+
         // Méthode principale du programme
+        [STAThread]
         static void Main(string[] args)
         {
             // Définit le titre de la console
@@ -25,7 +28,13 @@ namespace SpicyInvader
 
             // Crée une instance de la classe Game pour démarrer le jeu
             Game game = new Game();
-            game.Start(); // Démarre le jeu
+            game.Start();
+
+            //Thread gameThread = new Thread(game.Run);
+            //gameThread.SetApartmentState(ApartmentState.STA); // Définit le thread en mode STA
+            //gameThread.Start();
+
+            //gameThread.Join(); // Attend la fin de l'exécution du thread de jeu
         }
     }
 }

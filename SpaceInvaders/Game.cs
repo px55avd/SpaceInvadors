@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Windows.Input;
 
 namespace SpaceInvaders
 {
@@ -17,7 +18,9 @@ namespace SpaceInvaders
         private Player player; // Le joueur
         private List<Rocket> rockets; // Liste des missiles tirés par le joueur
 
-        // Constructeur de la classe Game
+        /// <summary>
+        /// Constructeur de la classe Game
+        /// </summary>
         public Game()
         {
             // Initialise les champs
@@ -152,7 +155,19 @@ namespace SpaceInvaders
         private void InitializeInvaders()
         {
             // Ajoute un envahisseur initial
-            invaders.Add(new Invader(Console.WindowWidth / 2, 5));
+            invaders.Add(new Invader((Console.WindowWidth)/2, 5));
         }
+
+        //[STAThread]
+        //public void Run()
+        //{
+        //    Start();
+        //    Update();
+        //    Draw();
+        //    DrawScore();
+        //    UserInput();
+        //    InitializeInvaders();
+        //}
+        
     }
 }

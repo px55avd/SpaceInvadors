@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Drawing;
 
+
 // Espace de noms SpaceInvaders
 namespace SpaceInvaders
 {
@@ -27,8 +28,8 @@ namespace SpaceInvaders
         // Initialise la position horizontale et verticale de l'envahisseur
         public Invader(int initialX, int initialY)
         {
-            this.initialX = random.Next(initialX);
-            this.initialY = random.Next(initialY);
+            this.initialX = random.Next(Console.WindowWidth);
+            this.initialY = random.Next(Console.WindowHeight);
 
 
             X = this.initialX = initialX;
@@ -39,8 +40,7 @@ namespace SpaceInvaders
         public void Move()
         {
 
-            Y++;
-
+            //Y++;
             
         }
 
@@ -62,7 +62,7 @@ namespace SpaceInvaders
         public Rectangle GetHitbox()
         {
             // Retourne un rectangle autour de l'envahisseur pour détecter les collisions
-            return new Rectangle(X, Y, 1, 1); // Modifier les dimensions selon la taille de l'envahisseur
+            return new Rectangle(X, Y, 2, 2); // Modifier les dimensions selon la taille de l'envahisseur
         }
 
 
@@ -71,9 +71,8 @@ namespace SpaceInvaders
         {
             X = initialX;
             Y = initialY;
-            this.initialX = random.Next(initialX);
-            this.initialY = random.Next(initialY);
-
+            this.initialX = random.Next(Console.WindowWidth);
+            this.initialY = random.Next(Console.WindowHeight -8);   
 
         }
     }
