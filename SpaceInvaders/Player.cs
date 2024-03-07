@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Drawing;
 
 
-// Espace de noms SpaceInvaders
+// Espace de noms S paceInvaders
 namespace SpaceInvaders
 {
     // Classe Player : représente le joueur dans le jeu SpaceInvaders
@@ -31,7 +32,12 @@ namespace SpaceInvaders
         public void Move(int newX)
         {
             X = newX;
-            
+        }
+
+        public Rectangle GetHitbox()
+        {
+            // Retourne un rectangle autour du joueur pour détecter les collisions
+            return new Rectangle(X, Y, 1, 1); // Modifier les dimensions selon la taille du missile
         }
 
         // Méthode Draw : dessine le joueur à sa position actuelle sur la console

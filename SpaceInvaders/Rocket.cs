@@ -39,6 +39,13 @@ namespace SpaceInvaders
             IsActive = true;
         }
 
+        public void InvadersActivate(int invadersX, int invadersY)
+        {
+            X = invadersX;
+            Y = invadersY + 1; // Juste au-dessous de l'invader
+            IsActive = true;
+        }
+
         // Méthode Move : déplace le missile vers le haut (dans le sens de Y)
         public void Move()
         {
@@ -48,6 +55,24 @@ namespace SpaceInvaders
                 if (Y > 0)
                 {
                     Y--;
+                }
+                else
+                {
+                    // Désactive le missile s'il sort de l'écran
+                    IsActive = false;
+                }
+            }
+        }
+
+        public void NegativMove()
+        {
+
+            if (IsActive)
+            {
+                // Vérifie si le missile ne sort pas de l'écran vers le haut
+                if (Y < Console.WindowHeight)
+                {
+                    Y++;
                 }
                 else
                 {

@@ -25,11 +25,11 @@ namespace SpicyInvader
             Console.Title = "SpicyInvader";
             // Masque le curseur dans la console
             Console.CursorVisible = false;
-
+           
             // Crée une instance de la classe Game pour démarrer le jeu
             Game game = new Game();
             game.Start();
-
+        
             //Thread gameThread = new Thread(game.Run);
             //gameThread.SetApartmentState(ApartmentState.STA); // Définit le thread en mode STA
             //gameThread.Start();
