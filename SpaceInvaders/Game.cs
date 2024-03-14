@@ -49,7 +49,7 @@ namespace SpaceInvaders
                 Draw(); // Dessine les éléments du jeu sur la console
                 Thread.Sleep(30); // Pause pour contrôler la vitesse du jeu
             }
-            
+
             // Affiche un message de fin de jeu lorsque le jeu est terminé
             Console.SetCursorPosition(0, Console.WindowHeight - 1);
             Console.WriteLine("Game Over! Press any key to exit...");
@@ -59,25 +59,32 @@ namespace SpaceInvaders
         // Méthode pour mettre à jour l'état du jeu
         private void Update()
         {
-            foreach (Invader invader in invaders)
+            // Crée une copie de la liste des envahisseurs pour éviter les modifications concurrentes
+            List<Invader> invadersCopy = new List<Invader>(invaders);
+            List<Rocket> rocketsCopy = new List<Rocket>(rockets);
+            List<Rocket> invadersRocketsCopy = new List<Rocket>(invadersRockets);
+
+            foreach (Invader invader in invadersCopy)
             {
 
-                    invader.Move();
-                
-                
+                invader.Move();
 
-                foreach (Rocket rocket in rockets)
+
+
+                foreach (Rocket rocket in rocketsCopy)
                 {
-                    // Vérifie si la hitbox du missile entre en collision avec la hitbox de l'envahisseur
+                    // Vérifie si la hitbox du missile du joeur entre en collision avec la hitbox de l'envahisseur
                     if (rocket.GetHitbox().IntersectsWith(invader.GetHitbox()))
                     {
+                        rocket.IsActive = false; // Désactive le missile
+                        rockets.Remove(rocket);
                         invader.Reset(); // Réinitialise l'envahisseur
                         score++; // Incrémente le score
-                        rocket.IsActive = false; // Désactive le missile
+                       
                     }
                 }
 
-                foreach(Rocket rocket in invadersRockets)
+                foreach (Rocket rocket in invadersRocketsCopy)
                 {
                     // Vérifie si la hitbox du missile entre en collision avec la hitbox de du joueur
                     if (rocket.GetHitbox().IntersectsWith(player.GetHitbox()))
@@ -95,22 +102,25 @@ namespace SpaceInvaders
                 }
 
                 //Déplacement des missiles
-                foreach (Rocket rocket in rockets)
+                foreach (Rocket rocket in rocketsCopy)
                 {
 
-                        rocket.Move();//Déplace le missile vers le haut de la console
-              
-                    
+                    rocket.Move();//Déplace le missile vers le haut de la console
+
+
                 }
-                foreach(Rocket rocket in invadersRockets)
+                foreach (Rocket rocket in invadersRocketsCopy)
                 {
-                   
-                        rocket.NegativMove();//Déplace le missile vers le haut de la console
-                    
-                    
-                    
+
+                    rocket.NegativMove();//Déplace le missile vers le haut de la console
+
+
+
                 }
             }
+
+            //List<Rocket> invadersRockets = invadersRocketsCopy;
+
 
             score++; // Augmente le score à chaque mise à jour
         }
@@ -164,6 +174,12 @@ namespace SpaceInvaders
             // Compteur pour suivre les déplacements du joueur
             int cptr = 0;
 
+            Random random = new Random();
+
+            int randomtouch = 30;
+
+            random.Next(randomtouch);
+
             // Boucle pour traiter les entrées utilisateur tant que le jeu n'est pas terminé
             while (!gameOver)
             {
@@ -182,7 +198,7 @@ namespace SpaceInvaders
                         // Pour chaque envahisseur, tire un missile toutes les 3 itérations du compteur
                         foreach (Invader invader in invaders)
                         {
-                            if (cptr % 3 == 0)
+                            if (cptr % randomtouch == 0)
                             {
                                 //foreach (Rocket rocket in invadersRockets) pas finit d'implmenter
                                 {
@@ -192,7 +208,7 @@ namespace SpaceInvaders
                                         Rocket newRocket = new Rocket(invader.X, invader.Y + 1);
                                         newRocket.InvadersActivate(invader.X, invader.Y); // Active le missile pour cibler les envahisseurs
                                         invadersRockets.Add(newRocket); // Ajoute le missile à la liste des missiles des envahisseurs
-                                        
+
                                     }
                                 }
                             }
@@ -207,7 +223,9 @@ namespace SpaceInvaders
                         // Pour chaque envahisseur, tire un missile toutes les 3 itérations du compteur
                         foreach (Invader invader in invaders)
                         {
-                            if (cptr % 3 == 0)
+
+
+                            if (cptr % randomtouch == 0)
                             {
                                 foreach (Rocket rocket in invadersRockets)//pas finit d'implémenter
                                 {
@@ -241,7 +259,7 @@ namespace SpaceInvaders
         private void InitializeInvaders()
         {
             // Ajoute un envahisseur initial
-            invaders.Add(new Invader((Console.WindowWidth)/2, 5));
+            invaders.Add(new Invader((Console.WindowWidth) / 2, 5));
         }
 
         //[STAThread]
@@ -254,6 +272,6 @@ namespace SpaceInvaders
         //    UserInput();
         //    InitializeInvaders();
         //}
-        
+
     }
 }

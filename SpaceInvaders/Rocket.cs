@@ -47,39 +47,36 @@ namespace SpaceInvaders
         }
 
         // Méthode Move : déplace le missile vers le haut (dans le sens de Y)
-        public void Move()
+        public bool Move()
         {
-            if (IsActive)
+
+            // Vérifie si le missile ne sort pas de l'écran vers le haut
+            if (Y > 0)
             {
-                // Vérifie si le missile ne sort pas de l'écran vers le haut
-                if (Y > 0)
-                {
-                    Y--;
-                }
-                else
-                {
-                    // Désactive le missile s'il sort de l'écran
-                    IsActive = false;
-                }
+                Y--;
             }
+            else
+            {
+                // Désactive le missile s'il sort de l'écran
+                IsActive = false;
+            }
+            
+            return IsActive;
         }
 
-        public void NegativMove()
+        public bool NegativMove()
         {
-
-            if (IsActive)
+            // Vérifie si le missile ne sort pas de l'écran vers le haut
+            if (Y < Console.WindowHeight)
             {
-                // Vérifie si le missile ne sort pas de l'écran vers le haut
-                if (Y < Console.WindowHeight)
-                {
-                    Y++;
-                }
-                else
-                {
-                    // Désactive le missile s'il sort de l'écran
-                    IsActive = false;
-                }
+                Y++;
             }
+            else
+            {
+                // Désactive le missile s'il sort de l'écran
+                IsActive = false;
+            }
+                return IsActive;
         }
 
         // Méthode pour obtenir la hitbox du missile
