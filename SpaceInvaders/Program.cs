@@ -29,6 +29,7 @@ namespace SpicyInvader
             // Crée une instance de la classe Game pour démarrer le jeu
             Game game = new Game();
             game.Start();
+
         
             //Thread gameThread = new Thread(game.Run);
             //gameThread.SetApartmentState(ApartmentState.STA); // Définit le thread en mode STA
