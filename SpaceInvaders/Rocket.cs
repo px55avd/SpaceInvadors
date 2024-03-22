@@ -1,4 +1,10 @@
-﻿using System;
+﻿///**************************************************************************************
+///ETML
+///Auteur : Omar Egal Ahmed
+///Date : 18.01.2024
+///Description : Création d'un programme de type jeu Scicy Invaders en mode Console. 
+///**************************************************************************************
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -83,7 +89,7 @@ namespace SpaceInvaders
         public Rectangle GetHitbox()
         {
             // Retourne un rectangle autour du missile pour détecter les collisions
-            return new Rectangle(X, Y, 1, 1); // Modifier les dimensions selon la taille du missile
+            return new Rectangle(X, Y, 2, 2); // Modifier les dimensions selon la taille du missile
         }
 
         // Méthode Draw : dessine le missile à sa position actuelle sur la console
@@ -91,13 +97,15 @@ namespace SpaceInvaders
         {
             if (IsActive)
             {
-                Console.SetCursorPosition(X, Y);
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.Write("|");
+                if (X > 0 && Y > 0)
+                {
+                    Console.SetCursorPosition(X, Y);
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write("|");
+                }
             }
         }
     }
-
 }
 
 

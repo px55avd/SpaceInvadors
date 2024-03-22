@@ -7,20 +7,16 @@
       "RelativeMoniker": "D:0:0:{763F1B5F-5378-41C3-9A67-FD72188B33F2}|SpaceInvaders.csproj|solutionrelative:game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{763F1B5F-5378-41C3-9A67-FD72188B33F2}|SpaceInvaders.csproj|D:\\P_progCheneau\\SpaceInvaders\\rocket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{763F1B5F-5378-41C3-9A67-FD72188B33F2}|SpaceInvaders.csproj|solutionrelative:rocket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{763F1B5F-5378-41C3-9A67-FD72188B33F2}|SpaceInvaders.csproj|D:\\P_progCheneau\\SpaceInvaders\\invader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{763F1B5F-5378-41C3-9A67-FD72188B33F2}|SpaceInvaders.csproj|solutionrelative:invader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{763F1B5F-5378-41C3-9A67-FD72188B33F2}|SpaceInvaders.csproj|D:\\P_progCheneau\\SpaceInvaders\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{763F1B5F-5378-41C3-9A67-FD72188B33F2}|SpaceInvaders.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{763F1B5F-5378-41C3-9A67-FD72188B33F2}|SpaceInvaders.csproj|D:\\P_progCheneau\\SpaceInvaders\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{763F1B5F-5378-41C3-9A67-FD72188B33F2}|SpaceInvaders.csproj|solutionrelative:player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{763F1B5F-5378-41C3-9A67-FD72188B33F2}|SpaceInvaders.csproj|D:\\P_progCheneau\\SpaceInvaders\\rocket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{763F1B5F-5378-41C3-9A67-FD72188B33F2}|SpaceInvaders.csproj|solutionrelative:rocket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,44 +26,47 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Invader.cs",
-              "DocumentMoniker": "D:\\P_progCheneau\\SpaceInvaders\\Invader.cs",
-              "RelativeDocumentMoniker": "Invader.cs",
-              "ToolTip": "D:\\P_progCheneau\\SpaceInvaders\\Invader.cs",
-              "RelativeToolTip": "Invader.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "DocumentIndex": 3,
+              "Title": "Rocket.cs",
+              "DocumentMoniker": "D:\\P_progCheneau\\SpaceInvaders\\Rocket.cs",
+              "RelativeDocumentMoniker": "Rocket.cs",
+              "ToolTip": "D:\\P_progCheneau\\SpaceInvaders\\Rocket.cs",
+              "RelativeToolTip": "Rocket.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAABZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-14T07:24:38.322Z",
+              "WhenOpened": "2024-03-14T07:24:38.43Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "Player.cs",
               "DocumentMoniker": "D:\\P_progCheneau\\SpaceInvaders\\Player.cs",
               "RelativeDocumentMoniker": "Player.cs",
               "ToolTip": "D:\\P_progCheneau\\SpaceInvaders\\Player.cs",
               "RelativeToolTip": "Player.cs",
-              "ViewState": "AQIAABUAAAAAAAAAAAAowAAAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAABZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-14T07:24:38.331Z"
+              "WhenOpened": "2024-03-14T07:24:38.331Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\P_progCheneau\\SpaceInvaders\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "D:\\P_progCheneau\\SpaceInvaders\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAAALAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAABZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-14T07:24:38.333Z"
+              "WhenOpened": "2024-03-14T07:24:38.333Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -77,22 +76,9 @@
               "RelativeDocumentMoniker": "Game.cs",
               "ToolTip": "D:\\P_progCheneau\\SpaceInvaders\\Game.cs",
               "RelativeToolTip": "Game.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAM8AAAAdAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAABZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-14T07:24:38.395Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Rocket.cs",
-              "DocumentMoniker": "D:\\P_progCheneau\\SpaceInvaders\\Rocket.cs",
-              "RelativeDocumentMoniker": "Rocket.cs",
-              "ToolTip": "D:\\P_progCheneau\\SpaceInvaders\\Rocket.cs",
-              "RelativeToolTip": "Rocket.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAEMAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-14T07:24:38.43Z",
               "EditorCaption": ""
             }
           ]

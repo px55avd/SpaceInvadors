@@ -1,4 +1,10 @@
-﻿using System;
+﻿///**************************************************************************************
+///ETML
+///Auteur : Omar Egal Ahmed
+///Date : 18.01.2024
+///Description : Création d'un programme de type jeu Scicy Invaders en mode Console. 
+///**************************************************************************************
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,7 +36,8 @@ namespace SpicyInvader
             Game game = new Game();
             game.Start();
 
-        
+            
+
             //Thread gameThread = new Thread(game.Run);
             //gameThread.SetApartmentState(ApartmentState.STA); // Définit le thread en mode STA
             //gameThread.Start();
