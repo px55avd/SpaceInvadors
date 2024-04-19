@@ -13,6 +13,7 @@ using System.Runtime.CompilerServices;
 using SpaceInvaders;
 using System.Threading;
 using System.Windows.Input;
+using System.Security.Cryptography.X509Certificates;
 
 [assembly: InternalsVisibleToAttribute("Game")]
 
@@ -29,14 +30,19 @@ namespace SpicyInvader
         {
             // Définit le titre de la console
             Console.Title = "SpicyInvader";
-            // Masque le curseur dans la console
-            Console.CursorVisible = false;
-           
-            // Crée une instance de la classe Game pour démarrer le jeu
-            Game game = new Game();
-            game.Start();
 
-            
+            // Cache le curseur de la console
+            Console.CursorVisible = false;
+
+            //Instanciation d'un nouvelle objet Menu 
+            Menu menu = new Menu(selectedIndexMenu: 0);
+
+            //Mise en page dynamique du menu
+            menu.ChangeBackColorConsole();
+
+            //Appel de la méthode pour naviger
+            menu.UserInput();
+
 
             //Thread gameThread = new Thread(game.Run);
             //gameThread.SetApartmentState(ApartmentState.STA); // Définit le thread en mode STA

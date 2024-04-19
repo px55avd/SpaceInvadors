@@ -15,7 +15,6 @@ using System.Drawing;
 
 
 
-// Espace de noms SpaceInvaders
 namespace SpaceInvaders
 {
     // Classe Rocket : représente un missile tiré par le joueur
@@ -28,8 +27,11 @@ namespace SpaceInvaders
         // Indique si le missile est actif (en vol) ou non
         public bool IsActive { get; set; }
 
-        // Constructeur de la classe Rocket
-        // Initialise la position horizontale et verticale du missile
+        /// <summary>
+        /// Constructeur de la classe Rocket
+        /// </summary>
+        /// <param name="initialX">Position horizontale initiale du missile</param>
+        /// <param name="initialY">Position verticale initiale du missile</param>
         public Rocket(int initialX, int initialY)
         {
             X = initialX;
@@ -37,7 +39,10 @@ namespace SpaceInvaders
             IsActive = false;
         }
 
-        // Méthode pour activer le missile et le faire partir
+        /// <summary>
+        /// Méthode pour activer le missile et le faire partir du joueur
+        /// </summary>
+        /// <param name="playerX">Position horizontale du joueur</param>
         public void Activate(int playerX)
         {
             X = playerX;
@@ -45,17 +50,24 @@ namespace SpaceInvaders
             IsActive = true;
         }
 
+        /// <summary>
+        /// Méthode pour activer le missile et le faire partir des envahisseurs
+        /// </summary>
+        /// <param name="invadersX">Position horizontale de l'envahisseur</param>
+        /// <param name="invadersY">Position verticale de l'envahisseur</param>
         public void InvadersActivate(int invadersX, int invadersY)
         {
             X = invadersX;
-            Y = invadersY + 1; // Juste au-dessous de l'invader
+            Y = invadersY + 1; // Juste au-dessous de l'envahisseur
             IsActive = true;
         }
 
-        // Méthode Move : déplace le missile vers le haut (dans le sens de Y)
+        /// <summary>
+        /// Méthode Move : déplace le missile vers le haut (dans le sens de Y)
+        /// </summary>
+        /// <returns>True si le missile est toujours actif après le déplacement, sinon False</returns>
         public bool Move()
         {
-
             // Vérifie si le missile ne sort pas de l'écran vers le haut
             if (Y > 0)
             {
@@ -63,36 +75,42 @@ namespace SpaceInvaders
             }
             else
             {
-                // Désactive le missile s'il sort de l'écran
-                IsActive = false;
+                IsActive = false; // Désactive le missile s'il sort de l'écran
             }
-            
             return IsActive;
         }
 
+        /// <summary>
+        /// Méthode NegativMove : déplace le missile vers le bas (dans le sens de Y)
+        /// </summary>
+        /// <returns>True si le missile est toujours actif après le déplacement, sinon False</returns>
         public bool NegativMove()
         {
-            // Vérifie si le missile ne sort pas de l'écran vers le haut
+            // Vérifie si le missile ne sort pas de l'écran vers le bas
             if (Y < Console.WindowHeight)
             {
                 Y++;
             }
             else
             {
-                // Désactive le missile s'il sort de l'écran
-                IsActive = false;
+                IsActive = false; // Désactive le missile s'il sort de l'écran
             }
-                return IsActive;
+            return IsActive;
         }
 
-        // Méthode pour obtenir la hitbox du missile
+        /// <summary>
+        /// Méthode pour obtenir la hitbox du missile
+        /// </summary>
+        /// <returns>Un rectangle représentant la hitbox du missile</returns>
         public Rectangle GetHitbox()
         {
             // Retourne un rectangle autour du missile pour détecter les collisions
             return new Rectangle(X, Y, 2, 2); // Modifier les dimensions selon la taille du missile
         }
 
-        // Méthode Draw : dessine le missile à sa position actuelle sur la console
+        /// <summary>
+        /// Méthode Draw : dessine le missile à sa position actuelle sur la console
+        /// </summary>
         public void Draw()
         {
             if (IsActive)
@@ -107,5 +125,6 @@ namespace SpaceInvaders
         }
     }
 }
+
 
 
