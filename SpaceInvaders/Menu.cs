@@ -12,7 +12,11 @@ namespace SpaceInvaders
         public int selectedIndex { get; set; }
 
         // Options du menu
-        private string[] _options = { "Lancer une nouvelle partie", "Option 2", "Option 3", "Quitter" };
+        private string[] _options = { "Lancer une nouvelle partie", "Difficulté", "Son", "Quitter" };
+
+        private string[] _optionsForIndex2 = { "Facile", "Moyen", "Difficle", "Retour", "Quitter"};
+
+        private string[] _optionsForIndex3 = { "Activer", "Désactiver","Retour", "Quitter" };
 
         /// <summary>
         /// Constructeur de la classe Menu
@@ -44,6 +48,62 @@ namespace SpaceInvaders
                 }
 
                 Console.WriteLine(_options[i]);
+
+
+                if (this.selectedIndex == _options.Length - 3)
+                {
+                    Console.Clear();
+                    this.selectedIndex = 0;
+                    
+
+                    for (int j = 0; j < _optionsForIndex2.Length; j++)
+                    {
+                        
+
+                        if (j == this.selectedIndex)
+                        {
+                            Console.BackgroundColor = ConsoleColor.Gray;
+                            Console.ForegroundColor = ConsoleColor.Black;
+                        }
+                        else
+                        {
+                            Console.BackgroundColor = ConsoleColor.Black;
+                            Console.ForegroundColor = ConsoleColor.Gray;
+                        }
+                        
+                        Console.WriteLine(_optionsForIndex2[j]);
+
+                        break;
+                    }
+
+                    
+                }
+
+                if (this.selectedIndex == _options.Length - 3)
+                {
+                    Console.Clear();
+                    this.selectedIndex = 0;
+
+                    for (int j = 0; j < _optionsForIndex3.Length; j++)
+                    {
+                        
+
+                        if (j == this.selectedIndex)
+                        {
+                            Console.BackgroundColor = ConsoleColor.Gray;
+                            Console.ForegroundColor = ConsoleColor.Black;
+                        }
+                        else
+                        {
+                            Console.BackgroundColor = ConsoleColor.Black;
+                            Console.ForegroundColor = ConsoleColor.Gray;
+                        }
+
+                        Console.WriteLine(_optionsForIndex3[j]);
+                    }
+
+                    break;
+                }
             }
         }
 
@@ -61,16 +121,25 @@ namespace SpaceInvaders
 
                 if (key.Key == ConsoleKey.UpArrow)
                 {
-                    // Déplace la sélection vers le haut
-                    selectedIndex = Math.Max(0, this.selectedIndex - 1);
-                    Console.ResetColor();
-                    ChangeBackColorConsole();
+                    
+                    selectedIndex = Math.Max(0, this.selectedIndex - 1); // Déplace la sélection vers le haut
+                    Console.ResetColor(); //Réinitialiser les couleurs de la console
+                    ChangeBackColorConsole(); //Appliquer le chamgement de couleurs souhaité
                 }
                 else if (key.Key == ConsoleKey.DownArrow)
                 {
-                    // Déplace la sélection vers le bas
-                    selectedIndex = Math.Min(_options.Length - 1, this.selectedIndex + 1);
-                    ChangeBackColorConsole();
+                    
+                    selectedIndex = Math.Min(_options.Length - 1, this.selectedIndex + 1); // Déplace la sélection vers le bas
+                    Console.ResetColor(); //Réinitialiser les couleurs de la console
+                    ChangeBackColorConsole(); //Appliquer le chamgement de couleurs souhaité
+                }
+                else if (key.Key == ConsoleKey.LeftArrow)
+                {
+
+                }
+                else if (key.Key == ConsoleKey.RightArrow)
+                {
+
                 }
                 else if (key.Key == ConsoleKey.Enter)
                 {
@@ -89,6 +158,11 @@ namespace SpaceInvaders
                         // Crée une instance de la classe Game pour démarrer le jeu
                         Game game = new Game();
                         game.Start();
+                    }
+                    // Affichage du sous menu de la difficulté
+                    if (this.selectedIndex == _options.Length - 3)
+                    {
+                        UserInput();
                     }
                     else
                     {
