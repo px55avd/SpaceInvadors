@@ -13,7 +13,6 @@ using System.Runtime.CompilerServices;
 using SpaceInvaders;
 using System.Threading;
 using System.Windows.Input;
-using System.Security.Cryptography.X509Certificates;
 
 [assembly: InternalsVisibleToAttribute("Game")]
 
@@ -37,12 +36,11 @@ namespace SpicyInvader
             //Instanciation d'un nouvelle objet Menu 
             Menu menu = new Menu(selectedIndexMenu: 0);
 
-            //Mise en page dynamique du menu
-            menu.ChangeBackColorConsole();
+            //Mise en page dynamique du menu principal
+            menu.ChangeBackColorConsole(menu.Options);
 
-            //Appel de la méthode pour naviger
+            //Appel de la méthode pour naviguer dans les menus
             menu.UserInput();
-
 
             //Thread gameThread = new Thread(game.Run);
             //gameThread.SetApartmentState(ApartmentState.STA); // Définit le thread en mode STA

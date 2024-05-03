@@ -67,7 +67,7 @@ namespace SpaceInvaders
             {
                 Update(); // Met à jour l'état du jeu
                 Draw(); // Dessine les éléments du jeu sur la console
-                Thread.Sleep(5); // Pause pour contrôler la vitesse du jeu
+                Thread.Sleep(2); // Pause pour contrôler la vitesse du jeu
 
                 // Crée une copie des liste des missiles pour éviter les modifications concurrentes
                 rocketsCopy = rockets;
