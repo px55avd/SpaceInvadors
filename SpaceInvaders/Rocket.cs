@@ -24,6 +24,12 @@ namespace SpaceInvaders
         public int X { get; private set; }
         // Propriété Y : position verticale du missile
         public int Y { get; private set; }
+        // Propriété OldX : ancienne position horizontale du missile
+        public int OldX { get; private set; } = 0;
+        // Propriété OldY : ancienne position verticale du missile
+        public int OldY { get; private set; } = 0;
+        // Propriété Symbol : apparence du missile
+        public string Playersymbol { get; private set; } = "|";
         // Indique si le missile est actif (en vol) ou non
         public bool IsActive { get; set; }
 
@@ -37,6 +43,9 @@ namespace SpaceInvaders
             X = initialX;
             Y = initialY;
             IsActive = false;
+
+            OldX = 0;
+            OldY = 0;
         }
 
         /// <summary>
@@ -46,7 +55,7 @@ namespace SpaceInvaders
         public void Activate(int playerX)
         {
             X = playerX;
-            Y = Console.WindowHeight - 3; // Juste au-dessus du joueur
+            Y = Console.WindowHeight - 1; // Juste au-dessus du joueur
             IsActive = true;
         }
 
@@ -69,13 +78,14 @@ namespace SpaceInvaders
         public bool Move()
         {
             // Vérifie si le missile ne sort pas de l'écran vers le haut
-            if (Y > 0)
+            if (Y >= 0)
             {
                 Y--;
             }
             else
             {
                 IsActive = false; // Désactive le missile s'il sort de l'écran
+               
             }
             return IsActive;
         }
@@ -105,7 +115,24 @@ namespace SpaceInvaders
         public Rectangle GetHitbox()
         {
             // Retourne un rectangle autour du missile pour détecter les collisions
-            return new Rectangle(X, Y, 2, 2); // Modifier les dimensions selon la taille du missile
+            return new Rectangle(X, Y, 1, 1); // Modifier les dimensions selon la taille du missile
+        }
+
+        /// <summary>
+        /// Méthode pour effacer les caractère 
+        /// </summary>
+        public static class Helper
+        {
+            public static void Erase(int x, int y, int length)
+            {
+                Console.SetCursorPosition(x, y);
+
+                // Efface les caractères à partir de la position spécifiée jusqu'à la longueur spécifiée
+                for (int i = 0; i < length; i++)
+                {
+                    Console.Write(" "); // Remplace chaque caractère par un espace vide
+                }
+            }
         }
 
         /// <summary>
@@ -113,14 +140,26 @@ namespace SpaceInvaders
         /// </summary>
         public void Draw()
         {
-            if (IsActive)
+            if (IsActive is true)
             {
-                if (X > 0 && Y > 0)
+                // Efface l'ancienne position du joueur uniquement si elle a changé
+                if (X > 0 && Y > 0 && (OldX != X || OldY != Y))
                 {
+                    Helper.Erase(OldX, OldY, Playersymbol.Length); // Efface un caractère à la position de l'ancien joueur
+                    OldX = X;
+                    OldY = Y;
+
+                    // Dessine le missile à sa nouvelle position
                     Console.SetCursorPosition(X, Y);
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.Write("|");
-                }
+                    Console.Write(Playersymbol);
+                }                    
+                
+                //Console.WriteLine(OldY);
+            }
+            else if(IsActive is false)
+            {
+               Helper.Erase(OldX, OldY, Playersymbol.Length); // Efface un caractère à la position de l'actuell joueur
             }
         }
     }

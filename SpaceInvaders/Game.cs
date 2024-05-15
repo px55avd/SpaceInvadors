@@ -67,7 +67,7 @@ namespace SpaceInvaders
             {
                 Update(); // Met à jour l'état du jeu
                 Draw(); // Dessine les éléments du jeu sur la console
-                Thread.Sleep(2); // Pause pour contrôler la vitesse du jeu
+                Thread.Sleep(1); // Pause pour contrôler la vitesse du jeu
 
                 // Crée une copie des liste des missiles pour éviter les modifications concurrentes
                 rocketsCopy = rockets;
@@ -125,6 +125,7 @@ namespace SpaceInvaders
                     {
                         rocket.IsActive = false; // Désactive le missile
                         invader.IsActive = false;
+                        //Todo: effacer le caracteère avant de l'effacer
                         rockets.Remove(rocket);
                         invaders.Remove(invader);
                         if (invaders.Count() == 0)
@@ -157,7 +158,6 @@ namespace SpaceInvaders
                         }
                     }
                 }
-
 
 
                 for (int j = 0; j < invadersRocketsCopy.Count; j++)
@@ -207,6 +207,7 @@ namespace SpaceInvaders
                 {
                     //Instanciation d'une variable boléene pour récupérer le retour de la méthode Move().
                     bool soFar;
+
                     Rocket rocket = rocketsCopy[j];
 
                     rocket.Move();// Méthode pour déplacer les missile du joueur.
@@ -217,9 +218,9 @@ namespace SpaceInvaders
                     //Condition si le missile sort de l'écran.
                     if(soFar == false)
                     {
+                        
                         rocketsCopy.Remove(rocket);// Supprime le  missile de la liste.
                     }
-
                 }
 
                 //Déplacement des missiles des ennemi
@@ -251,7 +252,7 @@ namespace SpaceInvaders
         private void Draw()
         {
             // Efface le contenu actuel de la console
-            Console.Clear();
+            //Console.Clear();
 
             // Dessine le joueur
             player.Draw();
@@ -275,7 +276,7 @@ namespace SpaceInvaders
                 Rocket rocket1 = invadersRocketsCopy[i];
                 rocket1.Draw();
             }
-           
+
             //Dessine les bunkers dans la console.
             for (int i = 0; i < bunkers.Count(); i++)
             {
@@ -323,7 +324,7 @@ namespace SpaceInvaders
                         playerPosition--; // Décrémente la position du joueur
                     }
                     // Déplace le joueur vers la droite si la touche enfoncée est la flèche droite et que le joueur n'est pas au bord droit de la console
-                    else if (key.Key == ConsoleKey.RightArrow && playerPosition < Console.WindowWidth - 1)
+                    else if (key.Key == ConsoleKey.RightArrow && playerPosition < (Console.WindowWidth - player.Playersymbol.Length) - 1)
                     {
                         playerPosition++; // Incrémente la position du joueur
                     }

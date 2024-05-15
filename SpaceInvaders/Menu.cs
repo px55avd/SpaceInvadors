@@ -108,7 +108,9 @@ namespace SpaceInvaders
 
                         //Crée une instance de la classe Game pour démarrer le jeu
                         Game game = new Game();
+                        Console.Clear();
                         game.Start();
+
                     }
                     // Affichage du sous menu de la difficulté si le menu en cours est egal au tableau _option
                     if (_selectedIndex == 1 && menu == _options)

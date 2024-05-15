@@ -24,17 +24,18 @@ namespace SpaceInvaders
 
         // Instantiation d'un bool pour controler la si les ennemi se déplace à gauche ou à droite
         bool leftOrRight = false;
-
         // Propriété X : position horizontale de l'envahisseur
         public int X { get; private set; }
-
         // Propriété Y : position verticale de l'envahisseur
-
         public int Y { get; private set; }
-
+        // Propriété OldX : ancienne position horizontale de l'envahisseur
+        public int OldX { get; private set; } = 0;
+        // Propriété OldY : ancienne position verticale de l'envahisseur
+        public int OldY { get; private set; } = 0;
+        // Propriété Symbol : apparence de l'envahisseur
+        public string Playersymbol { get; private set; } = "X";
         // Propriété IsActivate : L'etat de l'ennemi
         public bool IsActive { get; set; }
-
         // Initialise la position horizontale et verticale de l'envahisseur
         private int initialX = 0;
         private int initialY = 0;
@@ -48,6 +49,9 @@ namespace SpaceInvaders
         {
             X= initialX;
             Y = initialY;
+
+            OldX = 0;
+            OldY = 0;
         }
 
         /// <summary>
@@ -115,16 +119,35 @@ namespace SpaceInvaders
                 }
                 else
                 {
-                    // Vérifie si l'envahisseur est dans les limites de la console
-                    if (X > 0 && Y > 0)
+                    // Efface l'ancienne position du joueur uniquement si elle a changé
+                    if (X > 0 && Y > 0 && (OldX != X || OldY != Y))
                     {
-                        // Positionne le curseur à la position de l'envahisseur
+                        Helper.Erase(OldX, OldY, Playersymbol.Length); // Efface un caractère à la position de l'ancien joueur
+                        OldX = X;
+                        OldY = Y;
+
+                        // Dessine le missile à sa nouvelle position
                         Console.SetCursorPosition(X, Y);
-                        // Définit la couleur du texte pour représenter l'envahisseur
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        // Affiche l'envahisseur comme un caractère 'X' de couleur rouge
-                        Console.Write("X");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.Write(Playersymbol);
                     }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Méthode pour effacer les caractère 
+        /// </summary>
+        public static class Helper
+        {
+            public static void Erase(int x, int y, int length)
+            {
+                Console.SetCursorPosition(x, y);
+
+                // Efface les caractères à partir de la position spécifiée jusqu'à la longueur spécifiée
+                for (int i = 0; i < length; i++)
+                {
+                    Console.Write(" "); // Remplace chaque caractère par un espace vide
                 }
             }
         }
