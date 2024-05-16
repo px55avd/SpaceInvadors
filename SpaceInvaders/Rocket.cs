@@ -44,7 +44,7 @@ namespace SpaceInvaders
             Y = initialY;
             IsActive = false;
 
-            OldX = 0;
+            OldX = 10;
             OldY = 0;
         }
 
@@ -52,10 +52,10 @@ namespace SpaceInvaders
         /// Méthode pour activer le missile et le faire partir du joueur
         /// </summary>
         /// <param name="playerX">Position horizontale du joueur</param>
-        public void Activate(int playerX)
+        public void Activate(int playerX, int playerY)
         {
             X = playerX;
-            Y = Console.WindowHeight - 1; // Juste au-dessus du joueur
+            Y = playerY; // Juste au-dessus du joueur
             IsActive = true;
         }
 
@@ -78,7 +78,7 @@ namespace SpaceInvaders
         public bool Move()
         {
             // Vérifie si le missile ne sort pas de l'écran vers le haut
-            if (Y >= 0)
+            if (Y > Console.WindowHeight - Console.WindowHeight)
             {
                 Y--;
             }
@@ -157,13 +157,30 @@ namespace SpaceInvaders
                 
                 //Console.WriteLine(OldY);
             }
-            else if(IsActive is false)
+            else if (IsActive is false)
             {
-               Helper.Erase(OldX, OldY, Playersymbol.Length); // Efface un caractère à la position de l'actuell joueur
+                Helper.Erase(OldX, OldY, Playersymbol.Length); // Efface un caractère à la position de l'actuell joueur
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Drawfinalposiion()
+        {
+            Helper.Erase(OldX, OldY, Playersymbol.Length); // Efface un caractère à la position de l'ancien joueur  
+        }
+
+        internal Game Game
+        {
+            get => default;
+            set
+            {
             }
         }
     }
 }
+
 
 
 

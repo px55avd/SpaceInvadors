@@ -15,7 +15,20 @@ namespace SpaceInvaders
         public int X { get; private set; }
         public int Y { get; private set; }
         public bool Damaged { get; set; }
+        // Propriété OldX : ancienne position horizontale de l'envahisseur
+        public int OldX { get; private set; } = 0;
+        // Propriété OldY : ancienne position verticale de l'envahisseur
+        public int OldY { get; private set; } = 0;
+        // Propriété Symbol : apparence de l'envahisseur
         public string bunkerSymbol { get; set; }
+
+        internal Game Game
+        {
+            get => default;
+            set
+            {
+            }
+        }
 
         /// <summary>
         /// Constructeur de la classe Bunker
@@ -47,7 +60,7 @@ namespace SpaceInvaders
         {
             // Retourne un rectangle représentant la hitbox du bunker
             // Ici, un rectangle de 3x3 autour de la position du bunker est utilisé pour représenter sa hitbox
-            return new Rectangle(X, Y, 3, 3);
+            return new Rectangle(X, Y, 1, 1);
         }
 
         /// <summary>
@@ -65,5 +78,31 @@ namespace SpaceInvaders
                 Console.Write(bunkerSymbol);
             }
         }
+
+        /// <summary>
+        /// Méthode pour effacer les caractère 
+        /// </summary>
+        public static class Helper
+        {
+            public static void Erase(int x, int y, int length)
+            {
+                Console.SetCursorPosition(x, y);
+
+                // Efface les caractères à partir de la position spécifiée jusqu'à la longueur spécifiée
+                for (int i = 0; i < length; i++)
+                {
+                    Console.Write(" "); // Remplace chaque caractère par un espace vide
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Drawfinalposition()
+        {
+            Helper.Erase(X, Y, bunkerSymbol.Length); // Efface un caractère à la position de l'ancien joueur  
+        }
+
     }
 }

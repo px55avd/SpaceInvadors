@@ -35,7 +35,7 @@ namespace SpaceInvaders
         public Player(int initialX)
         {
             X = initialX;
-            Y = Console.WindowHeight - 2; // Juste au-dessus de la bordure inférieure
+            Y = Console.WindowHeight -1; // Juste au-dessus de la bordure inférieure
 
             OldX = 0;
             OldY = 0;
@@ -84,7 +84,7 @@ namespace SpaceInvaders
         public void Draw()
         {
             // Efface l'ancienne position du joueur uniquement si elle a changé
-            if (X > 0 && Y > 0 && (OldX != X))
+            if (X > 0 && (OldX != X))
             {
                 Helper.Erase(OldX, OldY, Playersymbol.Length); // Efface un caractère à la position de l'ancien joueur
                 OldX = X;

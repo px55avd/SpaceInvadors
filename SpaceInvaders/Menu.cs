@@ -209,5 +209,13 @@ namespace SpaceInvaders
                 }
             }
         }
+
+        internal SpicyInvader.Program Program
+        {
+            get => default;
+            set
+            {
+            }
+        }
     }
 }

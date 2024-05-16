@@ -50,7 +50,7 @@ namespace SpaceInvaders
             X= initialX;
             Y = initialY;
 
-            OldX = 0;
+            OldX = 10;
             OldY = 0;
         }
 
@@ -136,6 +136,14 @@ namespace SpaceInvaders
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public void Drawfinalposiion()
+        {
+            Helper.Erase(OldX, OldY, Playersymbol.Length); // Efface un caractère à la position de l'ancien joueur  
+        }
+
+        /// <summary>
         /// Méthode pour effacer les caractère 
         /// </summary>
         public static class Helper
@@ -160,6 +168,14 @@ namespace SpaceInvaders
         {
             // Retourne un rectangle autour de l'envahisseur pour détecter les collisions
             return new Rectangle(X, Y, 4, 3); // Modifier les dimensions selon la taille de l'envahisseur
+        }
+
+        internal Game Game
+        {
+            get => default;
+            set
+            {
+            }
         }
     }
 }
