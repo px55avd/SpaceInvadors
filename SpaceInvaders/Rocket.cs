@@ -11,27 +11,43 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Drawing;
-
+using System.Diagnostics;
 
 
 
 namespace SpaceInvaders
 {
     // Classe Rocket : représente un missile tiré par le joueur
-    internal class Rocket
+    public class Rocket
     {
         // Propriété X : position horizontale du missile
-        public int X { get; private set; }
+        private int _x;
+        public int X { get { return _x; } private set { _x = value; } }
+        
+        
         // Propriété Y : position verticale du missile
-        public int Y { get; private set; }
+        private int _y;
+        public int Y { get { return _y; } private set { _y = value; } }
+       
+        
         // Propriété OldX : ancienne position horizontale du missile
-        public int OldX { get; private set; } = 0;
+        private int _oldX = 0;
+        public int OldX { get { return _oldX; } private set { _oldX = value; } }
+        
+        
         // Propriété OldY : ancienne position verticale du missile
-        public int OldY { get; private set; } = 0;
+        private int _oldY = 0;
+        public int OldY { get { return _oldY; } private set { _oldY = value; } }
+       
+        
         // Propriété Symbol : apparence du missile
-        public string Playersymbol { get; private set; } = "|";
+        private string _rocketSymbol = "|";
+        public string Rocketsymbol { get { return _rocketSymbol; } private set { _rocketSymbol = value; } }
+        
+        
         // Indique si le missile est actif (en vol) ou non
-        public bool IsActive { get; set; }
+        private bool _isActivate;
+        public bool IsActive { get { return _isActivate; }  set { _isActivate = value; } }
 
         /// <summary>
         /// Constructeur de la classe Rocket
@@ -78,7 +94,7 @@ namespace SpaceInvaders
         public bool Move()
         {
             // Vérifie si le missile ne sort pas de l'écran vers le haut
-            if (Y > Console.WindowHeight - Console.WindowHeight)
+            if (Y > 0)
             {
                 Y--;
             }
@@ -142,24 +158,26 @@ namespace SpaceInvaders
         {
             if (IsActive is true)
             {
+                Debug.WriteLine("X:" + X);
+
                 // Efface l'ancienne position du joueur uniquement si elle a changé
                 if (X > 0 && Y > 0 && (OldX != X || OldY != Y))
                 {
-                    Helper.Erase(OldX, OldY, Playersymbol.Length); // Efface un caractère à la position de l'ancien joueur
+                    Helper.Erase(OldX, OldY, Rocketsymbol.Length); // Efface un caractère à la position de l'ancien joueur
                     OldX = X;
                     OldY = Y;
 
-                    // Dessine le missile à sa nouvelle position
+
+                    // Dessine le missile à sa nouvelle position      
                     Console.SetCursorPosition(X, Y);
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.Write(Playersymbol);
+                    Console.Write(Rocketsymbol);
                 }                    
                 
-                //Console.WriteLine(OldY);
             }
             else if (IsActive is false)
             {
-                Helper.Erase(OldX, OldY, Playersymbol.Length); // Efface un caractère à la position de l'actuell joueur
+                Helper.Erase(OldX, OldY, Rocketsymbol.Length); // Efface un caractère à la position de l'actuell joueur
             }
         }
 
@@ -168,7 +186,7 @@ namespace SpaceInvaders
         /// </summary>
         public void Drawfinalposiion()
         {
-            Helper.Erase(OldX, OldY, Playersymbol.Length); // Efface un caractère à la position de l'ancien joueur  
+            Helper.Erase(OldX, OldY, Rocketsymbol.Length); // Efface un caractère à la position de l'ancien joueur  
         }
 
         internal Game Game

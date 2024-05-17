@@ -9,18 +9,21 @@ using System.Drawing; // Importation de l'espace de noms System.Drawing pour uti
 
 namespace SpaceInvaders
 {
-    internal class Bunker
+    public class Bunker
     {
+
         // Propriétés pour la position et l'état du bunker
-        public int X { get; private set; }
-        public int Y { get; private set; }
-        public bool Damaged { get; set; }
-        // Propriété OldX : ancienne position horizontale de l'envahisseur
-        public int OldX { get; private set; } = 0;
-        // Propriété OldY : ancienne position verticale de l'envahisseur
-        public int OldY { get; private set; } = 0;
-        // Propriété Symbol : apparence de l'envahisseur
-        public string bunkerSymbol { get; set; }
+        private int _x;
+        public int X { get {return _x;} private set { _x = value; } }
+
+        private int _y;
+        public int Y { get { return _y; } private set { _y = value; } }
+
+        private bool _damaged;
+        public bool Damaged { get { return _damaged; } set { _damaged = value; } }
+
+        private string _bunkerSymbol;
+        public string BunkerSymbol { get { return _bunkerSymbol; } set { _bunkerSymbol = value; } }
 
         internal Game Game
         {
@@ -40,7 +43,8 @@ namespace SpaceInvaders
             X = x;
             Y = y;
             Damaged = false;
-            bunkerSymbol = "X"; // Symbole par défaut du bunker
+            BunkerSymbol = "X"; // Symbole par défaut du bunker
+           
         }
 
         /// <summary>
@@ -60,7 +64,7 @@ namespace SpaceInvaders
         {
             // Retourne un rectangle représentant la hitbox du bunker
             // Ici, un rectangle de 3x3 autour de la position du bunker est utilisé pour représenter sa hitbox
-            return new Rectangle(X, Y, 1, 1);
+            return new Rectangle(X, Y, 2, 1);
         }
 
         /// <summary>
@@ -75,7 +79,7 @@ namespace SpaceInvaders
                 // Définit la couleur du texte pour représenter le bunker
                 Console.ForegroundColor = ConsoleColor.White;
                 // Affiche le bunker comme une chaîne de caractères
-                Console.Write(bunkerSymbol);
+                Console.Write(BunkerSymbol);
             }
         }
 
@@ -101,7 +105,7 @@ namespace SpaceInvaders
         /// </summary>
         public void Drawfinalposition()
         {
-            Helper.Erase(X, Y, bunkerSymbol.Length); // Efface un caractère à la position de l'ancien joueur  
+            Helper.Erase(X, Y, BunkerSymbol.Length); // Efface un caractère à la position de l'ancien joueur  
         }
 
     }

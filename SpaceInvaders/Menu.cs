@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net.Sockets;
+using System.Threading;
 
 namespace SpaceInvaders
 {
-    internal class Menu
+    public class Menu
     {
         // Indice de l'option sélectionnée dans le menu
 
@@ -22,7 +25,14 @@ namespace SpaceInvaders
         private string[] _optionsForIndex2 = new string[] { "Activer", "Désactiver","Retour", "Quitter" };
         public string[] OptionsForIndex2 { get { return OptionsForIndex2; } set { value = OptionsForIndex2; } }
 
-
+        //Crée une instance de la classe Game pour démarrer le jeu
+        
+        private Game _game;
+        public Game Game
+        {
+            get { return _game; }
+            set { _game = value; }
+        }
 
         /// <summary>
         /// Constructeur de la classe Menu
@@ -60,7 +70,7 @@ namespace SpaceInvaders
         /// <summary>
         /// Méthode pour gérer les entrées utilisateur dans le menu
         /// </summary>
-        public void UserInput()
+        public void UserinputMenu()
         {
             Console.CursorVisible = false;
 
@@ -104,12 +114,14 @@ namespace SpaceInvaders
                         // Masque le curseur dans la console
                         Console.CursorVisible = false;
 
-                        //Console.WriteLine("nsdjkvngjksd");
-
-                        //Crée une instance de la classe Game pour démarrer le jeu
-                        Game game = new Game();
+                        //Efface tout ce qu'il ya dans la console c'est à dire le menu.
                         Console.Clear();
-                        game.Start();
+
+                        //Instanciation d'un nouveau Game.
+                        _game = new Game();
+
+                        //pour démarrer le jeu
+                        _game.Start();
 
                     }
                     // Affichage du sous menu de la difficulté si le menu en cours est egal au tableau _option
@@ -142,8 +154,6 @@ namespace SpaceInvaders
                     {
                         break;
                     }
-
-
                     // Si l'option sélectionnée est "Facile" et si le menu en cours est egal au tableau _optionsForIndex1
                     if (_selectedIndex == 0 && menu == _optionsForIndex1)
                     {
@@ -178,8 +188,6 @@ namespace SpaceInvaders
                     {
                         break;
                     }
-
-
                     // Si l'option sélectionnée est "Activer" et si le menu en cours est egal au tableau _optionsForIndex1
                     if (_selectedIndex == 0 && menu == _optionsForIndex2)
                     {

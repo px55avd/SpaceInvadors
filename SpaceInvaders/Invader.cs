@@ -17,28 +17,45 @@ using System.Drawing;
 namespace SpaceInvaders
 {
     // Classe Invader : représente un envahisseur dans le jeu SpaceInvaders
-    internal class Invader
+    public class Invader
     {
         //Instantiation d'un objet Ramdom
         Random random = new Random();
 
         // Instantiation d'un bool pour controler la si les ennemi se déplace à gauche ou à droite
-        bool leftOrRight = false;
+        private bool _leftOrRight = false;
+        public bool LeftorRight { get { return _leftOrRight; } set { _leftOrRight = value; } }
+
+
         // Propriété X : position horizontale de l'envahisseur
-        public int X { get; private set; }
+        private int _x;
+        public int X { get { return _x; } private set { _x = value; } }
+
+
         // Propriété Y : position verticale de l'envahisseur
-        public int Y { get; private set; }
+        private int _y;
+        public int Y { get { return _y; } private set { _y = value; } }
+
+
         // Propriété OldX : ancienne position horizontale de l'envahisseur
-        public int OldX { get; private set; } = 0;
+        private int _oldX = 0;
+        public int OldX { get { return _oldX; } private set { _oldX = value; } }
+
+
         // Propriété OldY : ancienne position verticale de l'envahisseur
-        public int OldY { get; private set; } = 0;
+        private int _oldY = 0;
+        public int OldY { get { return _oldY; } private set { _oldY = value; } }
+
+
         // Propriété Symbol : apparence de l'envahisseur
-        public string Playersymbol { get; private set; } = "X";
+        private string _invaderSymbol = "X";
+        public string Playersymbol { get { return _invaderSymbol; } private set { _invaderSymbol = value; } }
+
+
         // Propriété IsActivate : L'etat de l'ennemi
-        public bool IsActive { get; set; }
-        // Initialise la position horizontale et verticale de l'envahisseur
-        private int initialX = 0;
-        private int initialY = 0;
+        private bool _isActivate;
+        public bool IsActive { get { return _isActivate; } set { _isActivate = value; } }
+
 
         /// <summary>
         /// Constructeur de la classe Invader
@@ -52,6 +69,7 @@ namespace SpaceInvaders
 
             OldX = 10;
             OldY = 0;
+
         }
 
         /// <summary>
@@ -63,7 +81,7 @@ namespace SpaceInvaders
             if (IsActive)
             {
                 // Vérifie la direction de déplacement (gauche ou droite)
-                if (!leftOrRight) // Si leftOrRight est false, l'envahisseur se déplace vers la droite
+                if (!_leftOrRight) // Si leftOrRight est false, l'envahisseur se déplace vers la droite
                 {
                     X++; // Déplace l'envahisseur d'une unité vers la droite
                 }
@@ -76,13 +94,13 @@ namespace SpaceInvaders
                 if (X == Console.WindowWidth - 10)
                 {
                     Y++; // Déplace l'envahisseur vers le bas
-                    leftOrRight = true; // Change la direction de déplacement vers la gauche
+                    _leftOrRight = true; // Change la direction de déplacement vers la gauche
                 }
                 // Vérifie si l'envahisseur atteint le bord gauche de la console
                 else if (X == 5)
                 {
                     Y++; // Déplace l'envahisseur vers le bas
-                    leftOrRight = false; // Change la direction de déplacement vers la droite
+                    _leftOrRight = false; // Change la direction de déplacement vers la droite
                 }
             }
         }
@@ -104,7 +122,7 @@ namespace SpaceInvaders
                     // Déplace l'envahisseur vers le bas
                     Y++;
                     // Change la direction de déplacement vers la gauche
-                    leftOrRight = true;
+                    _leftOrRight = true;
                 }
                 // Vérifie si l'envahisseur atteint le bord gauche de la console
                 else if (X == 5)
@@ -115,7 +133,7 @@ namespace SpaceInvaders
                     // Déplace l'envahisseur vers le bas
                     Y++;
                     // Change la direction de déplacement vers la droite
-                    leftOrRight = false;
+                    _leftOrRight = false;
                 }
                 else
                 {

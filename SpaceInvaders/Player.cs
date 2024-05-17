@@ -16,17 +16,32 @@ using System.Diagnostics;
 namespace SpaceInvaders
 {
     // Classe Player : représente le joueur dans le jeu SpaceInvaders
-    internal class Player
+    public class Player
     {
-        // Propriété X : position horizontale du joueur
-        public int X { get; private set; }
-        // Propriété Y : position verticale du joueur
-        public int Y { get; private set; }
-        public int OldX { get; private set; } = 0;
-        // Propriété OldY : ancienne position verticale du missile
-        public int OldY { get; private set; } = 0;
-        // Propriété Symbol : apparence du vaisseaux du joueur
-        public string Playersymbol { get; private set; } = "<O>";
+        // Propriété X : position horizontale du vaisseaux du joueur.
+        private int _x;
+        public int X { get { return _x; } private set { _x = value; } }
+
+
+        // Propriété Y : position verticale du vaisseaux du joueur.
+        private int _y;
+        public int Y { get { return _y; } private set { _y = value; } }
+
+
+        // Propriété OldX : ancienne position horizontale du vaisseaux du joueur.
+        private int _oldX = 0;
+        public int OldX { get { return _oldX; } private set { _oldX = value; } }
+
+
+        // Propriété OldY : ancienne position verticaledu vaisseaux du joueur.
+        private int _oldY = 0;
+        public int OldY { get { return _oldY; } private set { _oldY = value; } }
+
+
+        // Propriété Symbol : apparence du vaisseaux du vaisseaux du joueur.
+        private string _playersymbol = "<O>";
+        public string Playersymbol { get { return _playersymbol; } private set { _playersymbol = value; } }
+
 
         /// <summary>
         /// Constructeur de la classe Player

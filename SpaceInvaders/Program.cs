@@ -33,14 +33,23 @@ namespace SpicyInvader
             // Cache le curseur de la console
             Console.CursorVisible = false;
 
+            // Disable vertical scrolling
+            Console.SetBufferSize(Console.WindowWidth, Console.WindowHeight);
+
             //Instanciation d'un nouvelle objet Menu 
             Menu menu = new Menu(selectedIndexMenu: 0);
 
             //Mise en page dynamique du menu principal
             menu.ChangeBackColorConsole(menu.Options);
 
+            
+
             //Appel de la méthode pour naviguer dans les menus
-            menu.UserInput();
+            menu.UserinputMenu();
+
+
+
+
 
             //Thread gameThread = new Thread(game.Run);
             //gameThread.SetApartmentState(ApartmentState.STA); // Définit le thread en mode STA
