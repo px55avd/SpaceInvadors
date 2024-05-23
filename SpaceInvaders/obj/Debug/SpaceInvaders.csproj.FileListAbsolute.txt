@@ -13,3 +13,10 @@ D:\P_progCheneau\SpaceInvaders\obj\Debug\SpaceInvaders.csproj.CoreCompileInputs.
 D:\P_progCheneau\SpaceInvaders\obj\Debug\SpaceInvaders.exe
 D:\P_progCheneau\SpaceInvaders\obj\Debug\SpaceInvaders.pdb
 D:\P_progCheneau\SpaceInvaders\obj\Debug\SpaceInvaders.csproj.AssemblyReference.cache
+E:\P_progCheneau\SpaceInvaders\bin\Debug\SpaceInvaders.exe.config
+E:\P_progCheneau\SpaceInvaders\bin\Debug\SpaceInvaders.exe
+E:\P_progCheneau\SpaceInvaders\bin\Debug\SpaceInvaders.pdb
+E:\P_progCheneau\SpaceInvaders\obj\Debug\SpaceInvaders.csproj.AssemblyReference.cache
+E:\P_progCheneau\SpaceInvaders\obj\Debug\SpaceInvaders.csproj.CoreCompileInputs.cache
+E:\P_progCheneau\SpaceInvaders\obj\Debug\SpaceInvaders.exe
+E:\P_progCheneau\SpaceInvaders\obj\Debug\SpaceInvaders.pdb

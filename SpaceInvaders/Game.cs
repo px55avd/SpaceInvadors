@@ -146,6 +146,33 @@ namespace SpaceInvaders
         {
             UserInput();
 
+
+            //Déplacement des missiles du joueur
+            for (int j = 0; j < _rocketsCopy.Count; j++)
+            {
+                //Instanciation d'une variable boléene pour récupérer le retour de la méthode Move().
+                bool soFar;
+
+                Rocket rocket = _rocketsCopy[j];
+
+
+
+                //if (_score % randommove == 0)
+
+                rocket.Move();//Déplacce les missile du joueurs
+
+
+                //Récupérer le retour de la méthode
+                soFar = rocket.Move();
+
+                //Condition si le missile sort de l'écran.
+                if (!soFar)
+                {
+                    rocket.Drawfinalposiion();
+                    _rocketsCopy.Remove(rocket);// Supprime le  missile de la liste.
+                }
+            }
+
             for (int i = 0; i < _invaders.Count; i++)
             {
                 //pour randomisé le tire de l'ennemi le plus proches
@@ -157,31 +184,7 @@ namespace SpaceInvaders
                 //Selection arbitraire
                 int randommove = 4;
 
-                //Déplacement des missiles du joueur
-                for (int j = 0; j < _rocketsCopy.Count; j++)
-                {
-                    //Instanciation d'une variable boléene pour récupérer le retour de la méthode Move().
-                    bool soFar;
 
-                    Rocket rocket = _rocketsCopy[j];
-
-
-
-                    if (_score % randommove == 0)
-                    {
-                        rocket.Move();//Déplacce les missile du joueurs
-                    }
-
-                    //Récupérer le retour de la méthode
-                    soFar = rocket.Move();
-
-                    //Condition si le missile sort de l'écran.
-                    if (!soFar)
-                    {
-                        rocket.Drawfinalposiion();
-                        _rocketsCopy.Remove(rocket);// Supprime le  missile de la liste.
-                    }
-                }
                 
                 
                 Invader invader = _invaders[i];
@@ -433,7 +436,7 @@ namespace SpaceInvaders
                         //Condition pour ne tiré qu'u
                         if (_rockets.Count() < 1)
                         {
-                            Rocket newRocket = new Rocket(_playerPosition, _player.Y - 1);// Crée un nouveau missile à la position actuelle du joueur
+                            Rocket newRocket = new Rocket(_playerPosition, _player.Y -1);// Crée un nouveau missile à la position actuelle du joueur
                             newRocket.Activate(_playerPosition, _player.Y - 1); // Active le missile pour cibler les ennemis
                             _rockets.Add(newRocket); // Ajoute le missile à la liste des missiles du joueur
                             _rocketsCopy = _rockets;

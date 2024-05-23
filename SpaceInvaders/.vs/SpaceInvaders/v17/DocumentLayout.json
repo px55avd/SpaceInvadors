@@ -44,7 +44,7 @@
               "RelativeDocumentMoniker": "Rocket.cs",
               "ToolTip": "D:\\P_progCheneau\\SpaceInvaders\\Rocket.cs",
               "RelativeToolTip": "Rocket.cs",
-              "ViewState": "AQIAAJYAAAAAAAAAAAAiwK8AAAAQAAAA",
+              "ViewState": "AQIAAG4AAAAAAAAAAAAkwHoAAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-17T14:21:33.401Z",
               "EditorCaption": ""
@@ -58,8 +58,7 @@
               "ToolTip": "D:\\P_progCheneau\\SpaceInvaders\\ClassDiagram1.cd",
               "RelativeToolTip": "ClassDiagram1.cd",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000463|",
-              "WhenOpened": "2024-05-03T13:08:57.433Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-03T13:08:57.433Z"
             },
             {
               "$type": "Document",
@@ -69,7 +68,7 @@
               "RelativeDocumentMoniker": "Game.cs",
               "ToolTip": "D:\\P_progCheneau\\SpaceInvaders\\Game.cs",
               "RelativeToolTip": "Game.cs",
-              "ViewState": "AQIAAJ0BAAAAAAAAAAAMwLUBAAAcAAAA",
+              "ViewState": "AQIAANoAAAAAAAAAAAAIwG4AAABAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-14T07:24:38.395Z",
               "EditorCaption": ""
@@ -82,10 +81,9 @@
               "RelativeDocumentMoniker": "Menu.cs",
               "ToolTip": "D:\\P_progCheneau\\SpaceInvaders\\Menu.cs",
               "RelativeToolTip": "Menu.cs",
-              "ViewState": "AQIAAEUAAAAAAAAAAAAmwNoAAAAJAAAA",
+              "ViewState": "AQIAAJcAAAAAAAAAAAAwwNoAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-19T11:31:19.124Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-19T11:31:19.124Z"
             },
             {
               "$type": "Document",
@@ -97,8 +95,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AQIAAAoAAAAAAAAAAAAlwC0AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-14T07:24:38.333Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-14T07:24:38.333Z"
             }
           ]
         }

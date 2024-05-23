@@ -94,7 +94,7 @@ namespace SpaceInvaders
         public bool Move()
         {
             // Vérifie si le missile ne sort pas de l'écran vers le haut
-            if (Y > 0)
+            if (Y > 0 )
             {
                 Y--;
             }
@@ -113,13 +113,16 @@ namespace SpaceInvaders
         public bool NegativMove()
         {
             // Vérifie si le missile ne sort pas de l'écran vers le bas
-            if (Y < Console.WindowHeight)
+            if (Y < Console.WindowHeight - 1)
             {
                 Y++;
             }
             else
             {
                 IsActive = false; // Désactive le missile s'il sort de l'écran
+                Y = 0;
+                X = 120;
+
             }
             return IsActive;
         }
@@ -158,7 +161,8 @@ namespace SpaceInvaders
         {
             if (IsActive is true)
             {
-                Debug.WriteLine("X:" + X);
+                //Debug.WriteLine("X:" + X);
+                Debug.WriteLine("Y:" + Y);
 
                 // Efface l'ancienne position du joueur uniquement si elle a changé
                 if (X > 0 && Y > 0 && (OldX != X || OldY != Y))
