@@ -22,8 +22,11 @@ namespace SpaceInvaders
         private bool _damaged;
         public bool Damaged { get { return _damaged; } set { _damaged = value; } }
 
-        private string _bunkerSymbol;
+        private string _bunkerSymbol = "X";
         public string BunkerSymbol { get { return _bunkerSymbol; } set { _bunkerSymbol = value; } }
+
+        private string _damagedBunkersymbol = "/";
+        public string DamagedBunkersymbol { get { return _damagedBunkersymbol; } set { _damagedBunkersymbol = value; } }
 
         internal Game Game
         {
@@ -40,10 +43,12 @@ namespace SpaceInvaders
         /// <param name="y">Position Y</param>
         public Bunker(int x, int y)
         {
-            X = x;
-            Y = y;
-            Damaged = false;
-            BunkerSymbol = "X"; // Symbole par défaut du bunker
+            //X = x;
+            //Y = y;
+            _x = x;
+            _y = y;
+            _damaged = false;
+            
            
         }
 
@@ -54,6 +59,7 @@ namespace SpaceInvaders
         {
             Damaged = true;
             // À faire (fait à moitié): Autres actions à effectuer lorsque le bunker est endommagé, comme changer son apparence
+            this.BunkerSymbol = _damagedBunkersymbol;
         }
 
         /// <summary>
@@ -64,7 +70,7 @@ namespace SpaceInvaders
         {
             // Retourne un rectangle représentant la hitbox du bunker
             // Ici, un rectangle de 3x3 autour de la position du bunker est utilisé pour représenter sa hitbox
-            return new Rectangle(X, Y, 2, 1);
+            return new Rectangle(X, Y, 1, 1);
         }
 
         /// <summary>

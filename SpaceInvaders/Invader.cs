@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Drawing;
+using System.Runtime.InteropServices;
 
 
 // Espace de noms SpaceInvaders
@@ -26,6 +27,10 @@ namespace SpaceInvaders
         private bool _leftOrRight = false;
         public bool LeftorRight { get { return _leftOrRight; } set { _leftOrRight = value; } }
 
+        // Instantiation d'un bool pour controler la si les ennemi se déplace à gauche ou à droite
+        private bool _down = false;
+        public bool Down { get { return _down; } set { _down = value; } }
+
 
         // Propriété X : position horizontale de l'envahisseur
         private int _x;
@@ -34,7 +39,7 @@ namespace SpaceInvaders
 
         // Propriété Y : position verticale de l'envahisseur
         private int _y;
-        public int Y { get { return _y; } private set { _y = value; } }
+        public int Y { get { return _y; }  set { _y = value; } }
 
 
         // Propriété OldX : ancienne position horizontale de l'envahisseur
@@ -56,6 +61,16 @@ namespace SpaceInvaders
         private bool _isActivate;
         public bool IsActive { get { return _isActivate; } set { _isActivate = value; } }
 
+        // Propriété X : position horizontale de l'envahisseur
+        private int _count = 0;
+        public int Count { get { return _count; } private set { _count = value; } }
+
+        private int _currentNumberofInvaders = 0;
+
+
+
+
+
 
         /// <summary>
         /// Constructeur de la classe Invader
@@ -75,8 +90,10 @@ namespace SpaceInvaders
         /// <summary>
         /// Méthode Move : déplace l'envahisseur vers le bas (dans le sens de Y)
         /// </summary>
-        public void Move()
+        public bool Move(int numberOfinvaders)
         {
+            _currentNumberofInvaders = numberOfinvaders;
+
             // Vérifie si l'envahisseur est actif avant de le déplacer
             if (IsActive)
             {
@@ -84,26 +101,43 @@ namespace SpaceInvaders
                 if (!_leftOrRight) // Si leftOrRight est false, l'envahisseur se déplace vers la droite
                 {
                     X++; // Déplace l'envahisseur d'une unité vers la droite
+                    _down = false;
                 }
                 else // Sinon, l'envahisseur se déplace vers la gauche
                 {
                     X--; // Déplace l'envahisseur d'une unité vers la gauche
+                    _down = false;
                 }
 
-                // Vérifie si l'envahisseur atteint le bord droit de la console
-                if (X == Console.WindowWidth - 10)
+
+
+                
                 {
-                    Y++; // Déplace l'envahisseur vers le bas
-                    _leftOrRight = true; // Change la direction de déplacement vers la gauche
+                    // Vérifie si l'envahisseur atteint le bord droit de la console
+                    if (X == Console.WindowWidth - 10)
+                    {
+                        
+                        
+                        _down = true;
+                        //_leftOrRight = true; // Change la direction de déplacement vers la gauche
+                    }
+                    // Vérifie si l'envahisseur atteint le bord gauche de la console
+                    else if (X == 5)
+                    {
+                        
+                        
+                        _down = true;
+                        //_leftOrRight = false; // Change la direction de déplacement vers la droite
+                    }
+
+
                 }
-                // Vérifie si l'envahisseur atteint le bord gauche de la console
-                else if (X == 5)
-                {
-                    Y++; // Déplace l'envahisseur vers le bas
-                    _leftOrRight = false; // Change la direction de déplacement vers la droite
-                }
+
             }
+
+            return _down;
         }
+
 
         /// <summary>
         /// Méthode Draw : dessine l'envahisseur à sa position actuelle sur la console
@@ -119,10 +153,7 @@ namespace SpaceInvaders
                     // Efface l'envahisseur de sa position actuelle
                     Console.SetCursorPosition(109, Y);
                     Console.Write("     ");
-                    // Déplace l'envahisseur vers le bas
-                    Y++;
                     // Change la direction de déplacement vers la gauche
-                    _leftOrRight = true;
                 }
                 // Vérifie si l'envahisseur atteint le bord gauche de la console
                 else if (X == 5)
@@ -130,10 +161,6 @@ namespace SpaceInvaders
                     // Efface l'envahisseur de sa position actuelle
                     Console.SetCursorPosition(6, Y);
                     Console.Write("     ");
-                    // Déplace l'envahisseur vers le bas
-                    Y++;
-                    // Change la direction de déplacement vers la droite
-                    _leftOrRight = false;
                 }
                 else
                 {

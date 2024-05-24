@@ -27,7 +27,7 @@ namespace SpaceInvaders
         
         // Propriété Y : position verticale du missile
         private int _y;
-        public int Y { get { return _y; } private set { _y = value; } }
+        public int Y { get { return _y; }  set { _y = value; } }
        
         
         // Propriété OldX : ancienne position horizontale du missile
@@ -83,7 +83,8 @@ namespace SpaceInvaders
         public void InvadersActivate(int invadersX, int invadersY)
         {
             X = invadersX;
-            Y = invadersY + 1; // Juste au-dessous de l'envahisseur
+            Y = invadersY +1
+                ; // Juste au-dessous de l'envahisseur
             IsActive = true;
         }
 
@@ -101,6 +102,7 @@ namespace SpaceInvaders
             else
             {
                 IsActive = false; // Désactive le missile s'il sort de l'écran
+                
                
             }
             return IsActive;
@@ -120,9 +122,10 @@ namespace SpaceInvaders
             else
             {
                 IsActive = false; // Désactive le missile s'il sort de l'écran
-                Y = 0;
-                X = 120;
 
+               
+                X = 120;
+                Y = 0;
             }
             return IsActive;
         }
@@ -140,19 +143,19 @@ namespace SpaceInvaders
         /// <summary>
         /// Méthode pour effacer les caractère 
         /// </summary>
-        public static class Helper
-        {
+
             public static void Erase(int x, int y, int length)
             {
+                string s = " ";
                 Console.SetCursorPosition(x, y);
 
                 // Efface les caractères à partir de la position spécifiée jusqu'à la longueur spécifiée
                 for (int i = 0; i < length; i++)
                 {
-                    Console.Write(" "); // Remplace chaque caractère par un espace vide
+                    Console.Write(s); // Remplace chaque caractère par un espace vide
                 }
             }
-        }
+        
 
         /// <summary>
         /// Méthode Draw : dessine le missile à sa position actuelle sur la console
@@ -167,7 +170,7 @@ namespace SpaceInvaders
                 // Efface l'ancienne position du joueur uniquement si elle a changé
                 if (X > 0 && Y > 0 && (OldX != X || OldY != Y))
                 {
-                    Helper.Erase(OldX, OldY, Rocketsymbol.Length); // Efface un caractère à la position de l'ancien joueur
+                    Erase(OldX, OldY, Rocketsymbol.Length); // Efface un caractère à la position de l'ancien joueur
                     OldX = X;
                     OldY = Y;
 
@@ -179,18 +182,14 @@ namespace SpaceInvaders
                 }                    
                 
             }
-            else if (IsActive is false)
-            {
-                Helper.Erase(OldX, OldY, Rocketsymbol.Length); // Efface un caractère à la position de l'actuell joueur
-            }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public void Drawfinalposiion()
+        public void Drawfinalposition()
         {
-            Helper.Erase(OldX, OldY, Rocketsymbol.Length); // Efface un caractère à la position de l'ancien joueur  
+            Erase(OldX, OldY, Rocketsymbol.Length); // Efface un caractère à la position de l'ancien joueur  
         }
 
         internal Game Game

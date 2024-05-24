@@ -32,6 +32,16 @@ namespace SpaceInvaders
             set { _gameOver = value; }
         }
 
+        private int _gameMode; // Indique si le mode jeu de la partie
+        public int GameMode
+        {
+            get { return _gameMode; }
+            set { _gameMode = value; }
+        }
+
+
+
+
         private int _score; // Score du joueur
         public int Score
         {
@@ -99,6 +109,7 @@ namespace SpaceInvaders
             // Initialise les champs
             _playerPosition = Console.WindowWidth / 2;
             _gameOver = false;
+            _gameMode = 0;
             _score = 0;
             _invaders = new List<Invader>();
             _player = new Player(_playerPosition);
@@ -108,6 +119,7 @@ namespace SpaceInvaders
             _rocketsCopy = new List<Rocket>(_rockets);
             _invadersRocketsCopy = new List<Rocket>(_invadersRockets);
             _bunkers = new List<Bunker>();
+
             InitializeInvaders(); // Initialise les envahisseurs
             InitializeBunkers(); // Initialisation des bunkers
         }
@@ -130,7 +142,27 @@ namespace SpaceInvaders
             {
                 Update(); // Met à jour l'état du jeu
                 Draw(); // Dessine les éléments du jeu sur la console
-                Thread.Sleep(25);
+
+                switch (_gameMode)
+                {
+                    case 0:
+                        Thread.Sleep(25);
+                        break;
+
+                    case 1:
+                        Thread.Sleep(18);
+                        break;
+
+                    case 2:
+                        Thread.Sleep(10);
+                        break;
+                            
+                    default:
+                        Thread.Sleep(25);
+                        break;
+                }
+
+                
             }
 
             // Affiche un message de fin de jeu lorsque le jeu est terminé
@@ -146,6 +178,11 @@ namespace SpaceInvaders
         {
             UserInput();
 
+            //Selection arbitraire
+            int randomtouch = 30;
+
+            //Selection arbitraire
+            int randommove = 4;
 
             //Déplacement des missiles du joueur
             for (int j = 0; j < _rocketsCopy.Count; j++)
@@ -155,21 +192,59 @@ namespace SpaceInvaders
 
                 Rocket rocket = _rocketsCopy[j];
 
-
-
-                //if (_score % randommove == 0)
-
-                rocket.Move();//Déplacce les missile du joueurs
-
+                if (_score % randommove == 2)
+                {
+                    rocket.Move();//Déplacce les missile du joueurs
+                }
 
                 //Récupérer le retour de la méthode
                 soFar = rocket.Move();
 
                 //Condition si le missile sort de l'écran.
-                if (!soFar)
+                if (soFar is false)
                 {
-                    rocket.Drawfinalposiion();
+                    rocket.Drawfinalposition();
+                    
                     _rocketsCopy.Remove(rocket);// Supprime le  missile de la liste.
+                    
+                }
+            }
+
+            //Déplacement des missiles des ennemi
+            for (int j = 0; j < _invadersRocketsCopy.Count; j++)
+            {
+                //Instanciation d'une variable boléene pour récupérer le retour de la méthode Move().
+                bool soFar;
+
+                Rocket rocket1 = _invadersRocketsCopy[j];
+
+
+
+
+                if (_score % randommove == 2)
+                {
+                    rocket1.NegativMove();
+                }
+
+                //Récupérer le retour de la méthode
+                soFar = rocket1.NegativMove();
+
+                if (soFar is false)
+                {
+                    rocket1.Drawfinalposition();
+
+                    _invadersRocketsCopy.Remove(rocket1);// Supprime le  missile de la liste.
+                }
+
+
+
+
+                //Condition si le missile sort de l'écran.
+                if (soFar is false)
+                {
+                    rocket1.Drawfinalposition();
+                    
+                    _rocketsCopy.Remove(rocket1);// Supprime le  missile de la liste.
                 }
             }
 
@@ -178,22 +253,38 @@ namespace SpaceInvaders
                 //pour randomisé le tire de l'ennemi le plus proches
                 Random random = new Random();
 
-                //Selection arbitraire
-                int randomtouch = 30;
+                //Instanciation d'une variable boléene pour récupérer le retour de la méthode Move().
+                bool soDown;
 
-                //Selection arbitraire
-                int randommove = 4;
-
-
-                
-                
                 Invader invader = _invaders[i];
 
-                if (_score % randommove == 0)
+                if (_score % randommove == 3)
                 {
-                    invader.Move();
+                    //Récupérer le retour de la méthode
+                    soDown = invader.Move(_invaders.Count);
+
+
+                    if (soDown is true)
+                    {
+                        for (int j = 0; j < _invaders.Count; j++)
+                        {
+                            Invader invaderBis = _invaders[j];
+
+                            invaderBis.Y++;
+
+                            if (!invaderBis.LeftorRight)
+
+                            {
+                                invaderBis.LeftorRight = true;
+                            }
+                            else if (invaderBis.LeftorRight)
+                            {
+                                invaderBis.LeftorRight = false;
+                            }
+                        }
+                    }
                 }
-                        
+
 
                 //On pousse la variable dans le random
                 random.Next(randomtouch);
@@ -210,29 +301,7 @@ namespace SpaceInvaders
                 }
                 
 
-                //Déplacement des missiles des ennemi
-                for (int j = 0; j < _invadersRocketsCopy.Count; j++)
-                {
-                    //Instanciation d'une variable boléene pour récupérer le retour de la méthode Move().
-                    bool soFar;
 
-                    Rocket rocket1 = _invadersRocketsCopy[j];
-                    
-                    if (_score % randommove == 0)
-                    {
-                        rocket1.NegativMove();
-                    }
-
-                    //Récupérer le retour de la méthode
-                    soFar = rocket1.NegativMove();
-
-                    //Condition si le missile sort de l'écran.
-                    if (soFar == false)
-                    {
-                        rocket1.Drawfinalposiion();
-                        _rocketsCopy.Remove(rocket1);// Supprime le  missile de la liste.
-                    }
-                }
 
                 for (int j = 0; j < _rocketsCopy.Count; j++)
                 {
@@ -241,13 +310,18 @@ namespace SpaceInvaders
                     // Vérifie si la hitbox du missile du joeur entre en collision avec la hitbox de l'envahisseur
                     if (rocket.GetHitbox().IntersectsWith(invader.GetHitbox()))
                     {
+
                         rocket.IsActive = false; // Désactive le missile
                         invader.IsActive = false;
+
                         //Effacer le caracteère avant de l'effacer
-                        rocket.Drawfinalposiion();
+                        rocket.Drawfinalposition();
+
                         _rockets.Remove(rocket);
+
                         invader.Drawfinalposiion();
                         _invaders.Remove(invader);
+
                         if (_invaders.Count() == 0)
                         {
                             InitializeInvaders();
@@ -263,19 +337,23 @@ namespace SpaceInvaders
                         // Vérifie si la hitbox missile joueur entre en collision avec la hitbox du bunker
                         if (rocket.GetHitbox().IntersectsWith(bunker.GetHitbox()))
                         {
+                            //Instanciation d'une variable boléene pour récupérer le retour de la méthode Move().
+                            bool touch;
+
+
                             rocket.IsActive = false;
-                            rocket.Drawfinalposiion();
+                            rocket.Drawfinalposition();
                             _rockets.Remove(rocket);
 
-                            if (bunker.Damaged == true && bunker.BunkerSymbol == "/")
+                                                       
+                            if (bunker.Damaged == true && bunker.BunkerSymbol == bunker.DamagedBunkersymbol)
                             {
                                 bunker.Drawfinalposition();
                                 _bunkers.Remove(bunker);
                             }
                             else
                             {
-                                bunker.BunkerSymbol = "/";
-                                bunker.Damaged = true;
+                                bunker.TakeDamage();
                             }
                         }
                     }
@@ -302,18 +380,17 @@ namespace SpaceInvaders
                         {
                             rocket1.IsActive = false;
 
-                            rocket1.Drawfinalposiion();
+                            rocket1.Drawfinalposition();
                             _rockets.Remove(rocket1);
 
-                            if (bunker.Damaged == true && bunker.BunkerSymbol == "/")
+                            if(bunker.BunkerSymbol == bunker.DamagedBunkersymbol)
                             {
                                 bunker.Drawfinalposition();
-                                _bunkers.Remove(bunker);                                
+                                _bunkers.Remove(bunker);
                             }
                             else
                             {
-                                bunker.BunkerSymbol = "/";
-                                bunker.Damaged = true;
+                                bunker.TakeDamage();
                             }
                         }
                     }
@@ -468,9 +545,9 @@ namespace SpaceInvaders
             int startY = 5; // Position verticale de départ
 
             // Boucle pour créer un bloc d'envahisseurs en rangée de 3 par 5
-            for (int row = 0; row < 1; row++)
+            for (int row = 0; row < 3; row++)
             {
-                for (int col = 0; col < 3; col++)
+                for (int col = 0; col < 5; col++)
                 {                    // Calculez la position horizontale pour chaque envahisseur dans la rangée
                     int invaderX = startX + col * (InvaderWidth + InvaderSpacingX);
                     // Calculez la position verticale pour chaque envahisseur dans la colonne
@@ -525,8 +602,8 @@ namespace SpaceInvaders
             if (closestInvader != null)
             {
                 
-                Rocket newRocket = new Rocket(closestInvader.X, closestInvader.Y + 1); // Créez un nouveau missile à la position de l'envahisseur
-                newRocket.InvadersActivate(closestInvader.X, closestInvader.Y + 1); // Active le missile pour cibler le joueur
+                Rocket newRocket = new Rocket(closestInvader.X, closestInvader.Y); // Créez un nouveau missile à la position de l'envahisseur
+                newRocket.InvadersActivate(closestInvader.X, closestInvader.Y); // Active le missile pour cibler le joueur
                 _invadersRockets.Add(newRocket); // Ajoute le missile à la liste des missiles des envahisseurs
             }
         }
@@ -541,24 +618,76 @@ namespace SpaceInvaders
             {
                 _bunkers.Add(new Bunker(Console.WindowWidth - 35 + (i), _player.Y - 5));
             }
+            // Ajoutez des bunkers à des positions spécifiques
+            for (int i = 0; i < 10; i++)
+            {
+                _bunkers.Add(new Bunker(Console.WindowWidth - 35 + (i), _player.Y - 6));
+            }
+            // Ajoutez des bunkers à des positions spécifiques
+            for (int i = 0; i < 10; i++)
+            {
+                _bunkers.Add(new Bunker(Console.WindowWidth - 35 + (i), _player.Y - 7));
+            }
+
+
 
             // Ajoutez des bunkers à des positions spécifiques
             for (int i = 0; i < 10; i++)
             {
                 _bunkers.Add(new Bunker(Console.WindowWidth - 55 + (i), _player.Y - 5));
             }
+            // Ajoutez des bunkers à des positions spécifiques
+            for (int i = 0; i < 10; i++)
+            {
+                _bunkers.Add(new Bunker(Console.WindowWidth - 55 + (i), _player.Y - 6));
+            }
+            // Ajoutez des bunkers à des positions spécifiques
+            for (int i = 0; i < 10; i++)
+            {
+                _bunkers.Add(new Bunker(Console.WindowWidth - 55 + (i), _player.Y - 7));
+            }
+
+
+
 
             // Ajoutez des bunkers à des positions spécifiques
             for (int i = 0; i < 10; i++)
             {
                 _bunkers.Add(new Bunker(Console.WindowWidth - 75 + (i), _player.Y - 5));
             }
+            // Ajoutez des bunkers à des positions spécifiques
+            for (int i = 0; i < 10; i++)
+            {
+                _bunkers.Add(new Bunker(Console.WindowWidth - 75 + (i), _player.Y - 6));
+            }
+            // Ajoutez des bunkers à des positions spécifiques
+            for (int i = 0; i < 10; i++)
+            {
+                _bunkers.Add(new Bunker(Console.WindowWidth - 75 + (i), _player.Y - 7));
+            }
+
+
+
 
             // Ajoutez des bunkers à des positions spécifiques
             for (int i = 0; i < 10; i++)
             {
                 _bunkers.Add(new Bunker(Console.WindowWidth - 95 + (i), _player.Y - 5));
             }
+            // Ajoutez des bunkers à des positions spécifiques
+            for (int i = 0; i < 10; i++)
+            {
+                _bunkers.Add(new Bunker(Console.WindowWidth - 95 + (i), _player.Y - 6));
+            }
+            // Ajoutez des bunkers à des positions spécifiques
+            for (int i = 0; i < 10; i++)
+            {
+                _bunkers.Add(new Bunker(Console.WindowWidth - 95 + (i), _player.Y - 7));
+            }
+
+
+
+
         }
     }
 }

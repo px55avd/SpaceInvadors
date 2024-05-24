@@ -41,6 +41,8 @@ namespace SpaceInvaders
         public Menu(int selectedIndexMenu)
         {
             _selectedIndex = selectedIndexMenu;
+            //Instanciation d'un nouveau Game.
+            _game = new Game();
         }
 
         /// <summary>
@@ -117,8 +119,7 @@ namespace SpaceInvaders
                         //Efface tout ce qu'il ya dans la console c'est à dire le menu.
                         Console.Clear();
 
-                        //Instanciation d'un nouveau Game.
-                        _game = new Game();
+
 
                         //pour démarrer le jeu
                         _game.Start();
@@ -157,17 +158,24 @@ namespace SpaceInvaders
                     // Si l'option sélectionnée est "Facile" et si le menu en cours est egal au tableau _optionsForIndex1
                     if (_selectedIndex == 0 && menu == _optionsForIndex1)
                     {
+                        _game.GameMode = 0;
+
+
                         Console.WriteLine("Le nieveau de difficlté est sur facile");
+                        
                     }
                     // Si l'option sélectionnée est "Moyen" et si le menu en cours est egal au tableau _optionsForIndex1
                     if (_selectedIndex == 1 && menu == _optionsForIndex1)
                     {
+
+                        _game.GameMode = 1;
                         Console.WriteLine("Le nieveau de difficlté est sur Moyen");
                     }
                     // Si l'option sélectionnée est "Difficle" et si le menu en cours est egal au tableau _optionsForIndex1
                     if (_selectedIndex == 2 && menu == _optionsForIndex1)
                     {
-                        Console.WriteLine("");
+                        _game.GameMode = 2;
+
                         Console.WriteLine("Le nieveau de difficlté est sur Difficle");
                     }
                     // Si l'option sélectionnée est "Retour" et si le menu en cours est egal au tableau _optionsForIndex1
