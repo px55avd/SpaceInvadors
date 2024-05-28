@@ -178,11 +178,44 @@ namespace SpaceInvaders
         {
             UserInput();
 
+            
+
             //Selection arbitraire
             int randomtouch = 30;
 
             //Selection arbitraire
             int randommove = 4;
+
+            int numberRocketmoduloMove = 0;
+            int numberInvadermoduloMove = 0;
+            int numberInvaderMissilefrequence = 0;
+
+            switch (_gameMode)
+            {
+                case 0:
+                    numberRocketmoduloMove = 2;
+                    numberInvadermoduloMove = 3;
+                    numberInvaderMissilefrequence = 3;
+                    break;
+
+                case 1:
+                    numberRocketmoduloMove = 2;
+                    numberInvadermoduloMove = 2;
+                    numberInvaderMissilefrequence = 2;
+                    break;
+
+                case 2:
+                    numberRocketmoduloMove = 1;
+                    numberInvadermoduloMove = 2;
+                    numberInvaderMissilefrequence = 0;
+                    break;
+
+                default:
+                    numberRocketmoduloMove = 2;
+                    numberInvadermoduloMove = 3;
+                    numberInvaderMissilefrequence = 3;
+                    break;
+            }
 
             //Déplacement des missiles du joueur
             for (int j = 0; j < _rocketsCopy.Count; j++)
@@ -192,22 +225,73 @@ namespace SpaceInvaders
 
                 Rocket rocket = _rocketsCopy[j];
 
-                if (_score % randommove == 2)
+                if (_score % randommove == numberRocketmoduloMove)
                 {
-                    rocket.Move();//Déplacce les missile du joueurs
+                    soFar = rocket.Move();//Déplacce les missile du joueurs
+                                          //Condition si le missile sort de l'écran.
+                    if (soFar is false)
+                    {
+                        rocket.Drawfinalposition();
+
+                        _rocketsCopy.Remove(rocket);// Supprime le  missile de la liste.
+
+                    }
                 }
 
-                //Récupérer le retour de la méthode
-                soFar = rocket.Move();
-
-                //Condition si le missile sort de l'écran.
-                if (soFar is false)
+                for (int i = 0; i < _invadersCopy.Count; i++)
                 {
-                    rocket.Drawfinalposition();
-                    
-                    _rocketsCopy.Remove(rocket);// Supprime le  missile de la liste.
-                    
+
+                    Invader invader = _invaders[i];
+
+                    // Vérifie si la hitbox du missile du joeur entre en collision avec la hitbox de l'envahisseur
+                    if (rocket.GetHitbox().IntersectsWith(invader.GetHitbox()))
+                    {
+
+                        rocket.IsActive = false; // Désactive le missile
+                        invader.IsActive = false;
+
+                        //Effacer le caracteère avant de l'effacer
+                        rocket.Drawfinalposition();
+
+                        _rockets.Remove(rocket);
+
+                        invader.Drawfinalposiion();
+                        _invaders.Remove(invader);
+
+                        if (_invaders.Count() == 0)
+                        {
+                            InitializeInvaders();
+                        }
+                        _score++; // Incrémente le score
+                    }
+
                 }
+
+                for (int k = 0; k < _bunkers.Count; k++)
+                {
+                    Bunker bunker = _bunkers[k];
+
+                    // Vérifie si la hitbox missile joueur entre en collision avec la hitbox du bunker
+                    if (rocket.GetHitbox().IntersectsWith(bunker.GetHitbox()))
+                    {
+
+                        rocket.IsActive = false;
+                        rocket.Drawfinalposition();
+                        _rockets.Remove(rocket);
+
+
+                        if (bunker.Damaged == true && bunker.BunkerSymbol == bunker.DamagedBunkersymbol)
+                        {
+                            bunker.Drawfinalposition();
+                            _bunkers.Remove(bunker);
+                        }
+                        else
+                        {
+                            bunker.TakeDamage();
+                        }
+                    }
+                }
+
             }
 
             //Déplacement des missiles des ennemi
@@ -216,39 +300,60 @@ namespace SpaceInvaders
                 //Instanciation d'une variable boléene pour récupérer le retour de la méthode Move().
                 bool soFar;
 
-                Rocket rocket1 = _invadersRocketsCopy[j];
+                Rocket rocket = _invadersRocketsCopy[j];
 
-
-
-
-                if (_score % randommove == 2)
+                //
+                if (_score % randommove == numberRocketmoduloMove)
                 {
-                    rocket1.NegativMove();
+                    //Récupérer le retour de la méthode
+                    soFar = rocket.NegativMove();
+
+                    //Condition si le missile sort de l'écran.
+                    if (soFar is false)
+                    {
+                        rocket.Drawfinalposition();
+
+                        _rocketsCopy.Remove(rocket);// Supprime le  missile de la liste.
+                    }
                 }
 
-                //Récupérer le retour de la méthode
-                soFar = rocket1.NegativMove();
-
-                if (soFar is false)
+                // Vérifie si la hitbox du missile entre en collision avec la hitbox de du joueur
+                if (rocket.GetHitbox().IntersectsWith(_player.GetHitbox()))
                 {
-                    rocket1.Drawfinalposition();
-
-                    _invadersRocketsCopy.Remove(rocket1);// Supprime le  missile de la liste.
+                    _gameOver = true; // fin du jeu
+                    break;
                 }
 
-
-
-
-                //Condition si le missile sort de l'écran.
-                if (soFar is false)
+                for (int k = 0; k < _bunkers.Count; k++)
                 {
-                    rocket1.Drawfinalposition();
-                    
-                    _rocketsCopy.Remove(rocket1);// Supprime le  missile de la liste.
+                    Bunker bunker = _bunkers[k];
+
+                    // Vérifie si la hitbox du missile envahisseur entre en collision avec la hitbox du bunker
+                    if (rocket.GetHitbox().IntersectsWith(bunker.GetHitbox()))
+                    {
+                        //
+                        rocket.IsActive = false;
+                        rocket.Drawfinalposition();
+                        _invadersRocketsCopy.Remove(rocket);
+
+
+                        //
+                        if (bunker.BunkerSymbol == bunker.DamagedBunkersymbol)
+                        {
+                            bunker.Drawfinalposition();
+                            _bunkers.Remove(bunker);
+                        }
+                        else
+                        {
+                            bunker.TakeDamage();
+                        }
+                    }
                 }
             }
 
-            for (int i = 0; i < _invaders.Count; i++)
+
+            //
+            for (int i = 0; i < _invadersCopy.Count; i++)
             {
                 //pour randomisé le tire de l'ennemi le plus proches
                 Random random = new Random();
@@ -258,14 +363,15 @@ namespace SpaceInvaders
 
                 Invader invader = _invaders[i];
 
-                if (_score % randommove == 3)
+                if (_score % randommove == numberInvadermoduloMove)
                 {
                     //Récupérer le retour de la méthode
                     soDown = invader.Move(_invaders.Count);
 
-
+                    //
                     if (soDown is true)
                     {
+                        //
                         for (int j = 0; j < _invaders.Count; j++)
                         {
                             Invader invaderBis = _invaders[j];
@@ -293,7 +399,7 @@ namespace SpaceInvaders
                 Invader closestInvader = FindClosestInvader();
                 if (closestInvader == invader)
                 {
-                    if (_score % randomtouch == 0)
+                    if (_score % randomtouch == numberInvaderMissilefrequence)
                     {
                         // Si oui, tirez un missile
                         FireClosestInvaderRocket();
@@ -303,98 +409,19 @@ namespace SpaceInvaders
 
 
 
-                for (int j = 0; j < _rocketsCopy.Count; j++)
-                {
-                    Rocket rocket = _rocketsCopy[j];
-
-                    // Vérifie si la hitbox du missile du joeur entre en collision avec la hitbox de l'envahisseur
-                    if (rocket.GetHitbox().IntersectsWith(invader.GetHitbox()))
-                    {
-
-                        rocket.IsActive = false; // Désactive le missile
-                        invader.IsActive = false;
-
-                        //Effacer le caracteère avant de l'effacer
-                        rocket.Drawfinalposition();
-
-                        _rockets.Remove(rocket);
-
-                        invader.Drawfinalposiion();
-                        _invaders.Remove(invader);
-
-                        if (_invaders.Count() == 0)
-                        {
-                            InitializeInvaders();
-                        }
-                        _score++; // Incrémente le score
-                    }
+                //for (int j = 0; j < _rocketsCopy.Count; j++)
+                //{
+                //    Rocket rocket = _rocketsCopy[j];
 
 
-                    for (int k = 0; k < _bunkers.Count; k++)
-                    {
-                        Bunker bunker = _bunkers[k];
-
-                        // Vérifie si la hitbox missile joueur entre en collision avec la hitbox du bunker
-                        if (rocket.GetHitbox().IntersectsWith(bunker.GetHitbox()))
-                        {
-                            //Instanciation d'une variable boléene pour récupérer le retour de la méthode Move().
-                            bool touch;
+                //}
 
 
-                            rocket.IsActive = false;
-                            rocket.Drawfinalposition();
-                            _rockets.Remove(rocket);
-
-                                                       
-                            if (bunker.Damaged == true && bunker.BunkerSymbol == bunker.DamagedBunkersymbol)
-                            {
-                                bunker.Drawfinalposition();
-                                _bunkers.Remove(bunker);
-                            }
-                            else
-                            {
-                                bunker.TakeDamage();
-                            }
-                        }
-                    }
-                }
+                //for (int j = 0; j < _invadersRocketsCopy.Count; j++)
+                //{
 
 
-                for (int j = 0; j < _invadersRocketsCopy.Count; j++)
-                {
-                    Rocket rocket1 = _invadersRocketsCopy[j];
-
-                    // Vérifie si la hitbox du missile entre en collision avec la hitbox de du joueur
-                    if (rocket1.GetHitbox().IntersectsWith(_player.GetHitbox()))
-                    {
-                        _gameOver = true; // fin du jeu
-                        break;
-                    }
-
-                    for (int k = 0; k < _bunkers.Count; k++)
-                    {
-                        Bunker bunker = _bunkers[k];
-
-                        // Vérifie si la hitbox du missile envahisseur entre en collision avec la hitbox du bunker
-                        if (rocket1.GetHitbox().IntersectsWith(bunker.GetHitbox()))
-                        {
-                            rocket1.IsActive = false;
-
-                            rocket1.Drawfinalposition();
-                            _rockets.Remove(rocket1);
-
-                            if(bunker.BunkerSymbol == bunker.DamagedBunkersymbol)
-                            {
-                                bunker.Drawfinalposition();
-                                _bunkers.Remove(bunker);
-                            }
-                            else
-                            {
-                                bunker.TakeDamage();
-                            }
-                        }
-                    }
-                }
+                //}
                 
                 //Vérifie que les invaders ne sont pas arrivés au niveau du joueur.
                 if (invader.Y == Console.WindowHeight - 1)
@@ -409,10 +436,12 @@ namespace SpaceInvaders
             // Crée une copie des liste des missiles pour éviter les modifications concurrentes
             _rocketsCopy = _rockets;
             _invadersRocketsCopy = _invadersRockets;
+            _invadersCopy = _invaders;
 
             //Conversion en liste
             _rocketsCopy.ToList<Rocket>();
             _invadersRocketsCopy.ToList<Rocket>();
+            _invadersCopy.ToList<Invader>();
         }
 
         /// <summary>
@@ -491,6 +520,9 @@ namespace SpaceInvaders
             // Boucle pour traiter les entrées utilisateur tant que le jeu n'est pas terminé
             //while (!_gameOver)
             {
+
+                int numberMissile = 0;
+
                 // Vérifie si une touche est disponible dans la console
                 if (Console.KeyAvailable)
                 {
@@ -510,8 +542,30 @@ namespace SpaceInvaders
                     // Tire un missile vers le haut si la touche enfoncée est la barre d'espace
                     else if (key.Key == ConsoleKey.Spacebar)
                     {
+
+                        switch (_gameMode)
+                        {
+                            case 0:
+                                numberMissile = 1;
+                                break;
+
+                            case 1:
+                                numberMissile = 2;
+                                break;
+
+                            case 2:
+                                numberMissile = 4;
+                                break;
+
+                            default:
+                                numberMissile = 1;
+                                break;
+                        }
+
+
+
                         //Condition pour ne tiré qu'u
-                        if (_rockets.Count() < 1)
+                        if (_rockets.Count() < numberMissile)
                         {
                             Rocket newRocket = new Rocket(_playerPosition, _player.Y -1);// Crée un nouveau missile à la position actuelle du joueur
                             newRocket.Activate(_playerPosition, _player.Y - 1); // Active le missile pour cibler les ennemis
@@ -613,6 +667,46 @@ namespace SpaceInvaders
         /// </summary>
         public void InitializeBunkers()
         {
+
+            switch (_gameMode)
+            {
+                case 0:
+                    break;
+
+                case 1:
+
+                    break;
+
+                case 2:
+                    // Ajoutez des bunkers à des positions spécifiques
+                    for (int i = 0; i < 10; i++)
+                    {
+                        _bunkers.Add(new Bunker(Console.WindowWidth - 35 + (i), _player.Y - 7));
+                    }
+
+                    // Ajoutez des bunkers à des positions spécifiques
+                    for (int i = 0; i < 10; i++)
+                    {
+                        _bunkers.Add(new Bunker(Console.WindowWidth - 55 + (i), _player.Y - 7));
+                    }
+
+                    // Ajoutez des bunkers à des positions spécifiques
+                    for (int i = 0; i < 10; i++)
+                    {
+                        _bunkers.Add(new Bunker(Console.WindowWidth - 75 + (i), _player.Y - 7));
+                    }
+
+                    // Ajoutez des bunkers à des positions spécifiques
+                    for (int i = 0; i < 10; i++)
+                    {
+                        _bunkers.Add(new Bunker(Console.WindowWidth - 95 + (i), _player.Y - 7));
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+
             // Ajoutez des bunkers à des positions spécifiques
             for (int i = 0; i < 10; i++)
             {
@@ -623,12 +717,6 @@ namespace SpaceInvaders
             {
                 _bunkers.Add(new Bunker(Console.WindowWidth - 35 + (i), _player.Y - 6));
             }
-            // Ajoutez des bunkers à des positions spécifiques
-            for (int i = 0; i < 10; i++)
-            {
-                _bunkers.Add(new Bunker(Console.WindowWidth - 35 + (i), _player.Y - 7));
-            }
-
 
 
             // Ajoutez des bunkers à des positions spécifiques
@@ -641,13 +729,6 @@ namespace SpaceInvaders
             {
                 _bunkers.Add(new Bunker(Console.WindowWidth - 55 + (i), _player.Y - 6));
             }
-            // Ajoutez des bunkers à des positions spécifiques
-            for (int i = 0; i < 10; i++)
-            {
-                _bunkers.Add(new Bunker(Console.WindowWidth - 55 + (i), _player.Y - 7));
-            }
-
-
 
 
             // Ajoutez des bunkers à des positions spécifiques
@@ -660,13 +741,6 @@ namespace SpaceInvaders
             {
                 _bunkers.Add(new Bunker(Console.WindowWidth - 75 + (i), _player.Y - 6));
             }
-            // Ajoutez des bunkers à des positions spécifiques
-            for (int i = 0; i < 10; i++)
-            {
-                _bunkers.Add(new Bunker(Console.WindowWidth - 75 + (i), _player.Y - 7));
-            }
-
-
 
 
             // Ajoutez des bunkers à des positions spécifiques
@@ -679,11 +753,7 @@ namespace SpaceInvaders
             {
                 _bunkers.Add(new Bunker(Console.WindowWidth - 95 + (i), _player.Y - 6));
             }
-            // Ajoutez des bunkers à des positions spécifiques
-            for (int i = 0; i < 10; i++)
-            {
-                _bunkers.Add(new Bunker(Console.WindowWidth - 95 + (i), _player.Y - 7));
-            }
+
 
 
 

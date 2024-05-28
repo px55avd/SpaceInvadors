@@ -123,7 +123,7 @@ namespace SpaceInvaders
             {
                 IsActive = false; // Désactive le missile s'il sort de l'écran
 
-               
+
                 X = 120;
                 Y = 0;
             }
@@ -143,18 +143,17 @@ namespace SpaceInvaders
         /// <summary>
         /// Méthode pour effacer les caractère 
         /// </summary>
+        public static void Erase(int x, int y, int length)
+        {
+            string s = " ";
+            Console.SetCursorPosition(x, y);
 
-            public static void Erase(int x, int y, int length)
+            // Efface les caractères à partir de la position spécifiée jusqu'à la longueur spécifiée
+            for (int i = 0; i < length; i++)
             {
-                string s = " ";
-                Console.SetCursorPosition(x, y);
-
-                // Efface les caractères à partir de la position spécifiée jusqu'à la longueur spécifiée
-                for (int i = 0; i < length; i++)
-                {
-                    Console.Write(s); // Remplace chaque caractère par un espace vide
-                }
+                Console.Write(s); // Remplace chaque caractère par un espace vide
             }
+        }
         
 
         /// <summary>
@@ -179,8 +178,7 @@ namespace SpaceInvaders
                     Console.SetCursorPosition(X, Y);
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.Write(Rocketsymbol);
-                }                    
-                
+                }                     
             }
         }
 
