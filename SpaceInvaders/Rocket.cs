@@ -1,17 +1,12 @@
-﻿///**************************************************************************************
-///ETML
+﻿///ETML
 ///Auteur : Omar Egal Ahmed
 ///Date : 18.01.2024
 ///Description : Création d'un programme de type jeu Scicy Invaders en mode Console. 
-///**************************************************************************************
+/// Descrition de classe: La classe Rocket est utilisée pour créer et gérer les missiles tirés par le joueur et les envahisseurs dans le jeu Space Invaders. 
+/// Elle permet de déplacer les missiles, de détecter les collisions avec d'autres objets du jeu et de les dessiner correctement sur la console.
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
 using System.Drawing;
-using System.Diagnostics;
+using System.IO;
 
 
 
@@ -20,27 +15,38 @@ namespace SpaceInvaders
     // Classe Rocket : représente un missile tiré par le joueur
     public class Rocket
     {
-        // Propriété X : position horizontale du missile
+
         private int _x;
-        public int X { get { return _x; } private set { _x = value; } }
+        /// <summary>
+        /// Propriété X : position horizontale du missile
+        /// </summary>
+        public int X { get { return _x; } set { _x = value; } }
         
         
-        // Propriété Y : position verticale du missile
+        /// <summary>
+        /// Propriété Y : position verticale du missile
+        /// </summary>
         private int _y;
         public int Y { get { return _y; }  set { _y = value; } }
        
         
-        // Propriété OldX : ancienne position horizontale du missile
+        /// <summary>
+        /// Propriété OldX : ancienne position horizontale du missile
+        /// </summary>
         private int _oldX = 0;
-        public int OldX { get { return _oldX; } private set { _oldX = value; } }
+        public int OldX { get { return _oldX; } set { _oldX = value; } }
         
         
-        // Propriété OldY : ancienne position verticale du missile
+        /// <summary>
+        /// Propriété OldY : ancienne position verticale du missile
+        /// </summary>
         private int _oldY = 0;
         public int OldY { get { return _oldY; } private set { _oldY = value; } }
        
         
-        // Propriété Symbol : apparence du missile
+        /// <summary>
+        /// Propriété Symbol : apparence du missile
+        /// </summary>
         private string _rocketSymbol = "|";
         public string Rocketsymbol { get { return _rocketSymbol; } private set { _rocketSymbol = value; } }
         
@@ -123,7 +129,7 @@ namespace SpaceInvaders
             {
                 IsActive = false; // Désactive le missile s'il sort de l'écran
 
-
+                
                 X = 120;
                 Y = 0;
             }
@@ -164,26 +170,28 @@ namespace SpaceInvaders
             if (IsActive is true)
             {
                 //Debug.WriteLine("X:" + X);
-                Debug.WriteLine("Y:" + Y);
+                //Debug.WriteLine("Y:" + Y);
 
                 // Efface l'ancienne position du joueur uniquement si elle a changé
                 if (X > 0 && Y > 0 && (OldX != X || OldY != Y))
                 {
                     Erase(OldX, OldY, Rocketsymbol.Length); // Efface un caractère à la position de l'ancien joueur
-                    OldX = X;
-                    OldY = Y;
+
 
 
                     // Dessine le missile à sa nouvelle position      
                     Console.SetCursorPosition(X, Y);
-                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.Write(Rocketsymbol);
+
+                    OldX = X;
+                    OldY = Y;
                 }                     
             }
         }
 
         /// <summary>
-        /// 
+        /// Méthode pour effacer les caractère 
         /// </summary>
         public void Drawfinalposition()
         {

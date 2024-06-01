@@ -20,4 +20,3 @@ E:\P_progCheneau\SpaceInvaders\obj\Debug\SpaceInvaders.csproj.AssemblyReference.
 E:\P_progCheneau\SpaceInvaders\obj\Debug\SpaceInvaders.csproj.CoreCompileInputs.cache
 E:\P_progCheneau\SpaceInvaders\obj\Debug\SpaceInvaders.exe
 E:\P_progCheneau\SpaceInvaders\obj\Debug\SpaceInvaders.pdb
-D:\P_progCheneau\SpaceInvaders\obj\Debug\SpaceInvaders.csproj.SuggestedBindingRedirects.cache

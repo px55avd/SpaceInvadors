@@ -1,9 +1,9 @@
-﻿///**************************************************************************************
-///ETML
+﻿///ETML
 ///Auteur : Omar Egal Ahmed
 ///Date : 18.01.2024
 ///Description : Création d'un programme de type jeu Scicy Invaders en mode Console. 
-///**************************************************************************************
+/// Descrition de classe: La classe Bunker est utilisée pour créer et gérer les bunkers dans le jeu Space Invaders. Chaque instance de la classe représente un unique bunker. 
+/// Les méthodes permettent de gérer les dégâts subis par le bunker et de le dessiner correctement sur la console.
 using System;
 using System.Drawing; // Importation de l'espace de noms System.Drawing pour utiliser Rectangle
 
@@ -16,17 +16,46 @@ namespace SpaceInvaders
         private int _x;
         public int X { get {return _x;} private set { _x = value; } }
 
+        // Champ privé pour stocker la coordonnée Y
         private int _y;
-        public int Y { get { return _y; } private set { _y = value; } }
 
+        // Propriété publique pour accéder à la coordonnée Y
+        // Le setter est privé, donc seul la classe peut modifier cette valeur
+        public int Y
+        {
+            get { return _y; }
+            private set { _y = value; }
+        }
+
+        // Champ privé pour indiquer si le bunker est endommagé
         private bool _damaged;
-        public bool Damaged { get { return _damaged; } set { _damaged = value; } }
 
+        // Propriété publique pour accéder et modifier l'état d'endommagement du bunker
+        public bool Damaged
+        {
+            get { return _damaged; }
+            set { _damaged = value; }
+        }
+
+        // Champ privé pour le symbole du bunker
         private string _bunkerSymbol = "X";
-        public string BunkerSymbol { get { return _bunkerSymbol; } set { _bunkerSymbol = value; } }
 
-        private string _damagedBunkersymbol = "/";
-        public string DamagedBunkersymbol { get { return _damagedBunkersymbol; } set { _damagedBunkersymbol = value; } }
+        // Propriété publique pour accéder et modifier le symbole du bunker
+        public string BunkerSymbol
+        {
+            get { return _bunkerSymbol; }
+            set { _bunkerSymbol = value; }
+        }
+
+        // Champ privé pour le symbole d'un bunker endommagé
+        private string _damagedBunkerSymbol = "/";
+
+        // Propriété publique pour accéder et modifier le symbole d'un bunker endommagé
+        public string DamagedBunkerSymbol
+        {
+            get { return _damagedBunkerSymbol; }
+            set { _damagedBunkerSymbol = value; }
+        }
 
         internal Game Game
         {
@@ -43,13 +72,9 @@ namespace SpaceInvaders
         /// <param name="y">Position Y</param>
         public Bunker(int x, int y)
         {
-            //X = x;
-            //Y = y;
             _x = x;
             _y = y;
             _damaged = false;
-            
-           
         }
 
         /// <summary>
@@ -59,7 +84,7 @@ namespace SpaceInvaders
         {
             Damaged = true;
             // À faire (fait à moitié): Autres actions à effectuer lorsque le bunker est endommagé, comme changer son apparence
-            this.BunkerSymbol = _damagedBunkersymbol;
+            this.BunkerSymbol = _damagedBunkerSymbol;
         }
 
         /// <summary>
@@ -92,27 +117,25 @@ namespace SpaceInvaders
         /// <summary>
         /// Méthode pour effacer les caractère 
         /// </summary>
-        public static class Helper
+        public static void Erase(int x, int y, int length)
         {
-            public static void Erase(int x, int y, int length)
-            {
-                Console.SetCursorPosition(x, y);
+            Console.SetCursorPosition(x, y);
 
-                // Efface les caractères à partir de la position spécifiée jusqu'à la longueur spécifiée
-                for (int i = 0; i < length; i++)
-                {
-                    Console.Write(" "); // Remplace chaque caractère par un espace vide
-                }
+            // Efface les caractères à partir de la position spécifiée jusqu'à la longueur spécifiée
+            for (int i = 0; i < length; i++)
+            {
+                Console.Write(" "); // Remplace chaque caractère par un espace vide
             }
         }
+        
 
         /// <summary>
-        /// 
+        /// Méthode pour effacer les derniere position des bunkers.
         /// </summary>
         public void Drawfinalposition()
         {
-            Helper.Erase(X, Y, BunkerSymbol.Length); // Efface un caractère à la position de l'ancien joueur  
+            //Appel de la méthode 
+            Erase(X, Y, BunkerSymbol.Length); // Efface un caractère à la position de l'ancien joueur  
         }
-
     }
 }

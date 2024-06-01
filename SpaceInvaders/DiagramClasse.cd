@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="SpaceInvaders.Bunker">
+    <Position X="14.75" Y="12.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAgEIAARAAgAAAAAAAAAACAgAAAAAAAAYgAAAYAE=</HashCode>
+      <FileName>Bunker.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Game" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SpaceInvaders.Game">
+    <Position X="9.75" Y="7" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAQgpIgKACEAAqhABAEAiAAAEDEIEAAAAgCAAQQAABM=</HashCode>
+      <FileName>Game.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Menu" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SpaceInvaders.Invader">
+    <Position X="14.75" Y="6" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AEgAIAoIAIRTAwAAEAAAAAQAGAgAAAABAASAgAAAYAA=</HashCode>
+      <FileName>Invader.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Game" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SpaceInvaders.Menu">
+    <Position X="3.75" Y="7.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAQAQAAAQAIACAAAAAACABAAAgAAAAAkAAAAABAAAQ=</HashCode>
+      <FileName>Menu.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Program" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SpaceInvaders.Player">
+    <Position X="9.75" Y="1.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAIAAIAIRDAwAAAAAAAAAACAgAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>Player.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Game" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SpaceInvaders.Rocket">
+    <Position X="3.5" Y="12" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAIgAIAIRDA0BAEAAAAAAACAgQAAgAAAAAAAAAYAA=</HashCode>
+      <FileName>Rocket.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Game" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SpicyInvader.Program">
+    <Position X="0.5" Y="7.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

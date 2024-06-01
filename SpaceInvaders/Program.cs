@@ -1,18 +1,11 @@
-﻿///**************************************************************************************
-///ETML
+﻿///ETML
 ///Auteur : Omar Egal Ahmed
 ///Date : 18.01.2024
 ///Description : Création d'un programme de type jeu Scicy Invaders en mode Console. 
-///**************************************************************************************
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.CompilerServices;
+///
 using SpaceInvaders;
-using System.Threading;
-using System.Windows.Input;
+using System;
+using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleToAttribute("Game")]
 
@@ -22,9 +15,6 @@ namespace SpicyInvader
     // Classe Program : Point d'entrée du programme
     internal class Program
     {
-
-        // Méthode principale du programme
-        [STAThread]
         static void Main(string[] args)
         {
             // Définit le titre de la console
@@ -37,25 +27,13 @@ namespace SpicyInvader
             Console.SetBufferSize(Console.WindowWidth, Console.WindowHeight);
 
             //Instanciation d'un nouvelle objet Menu 
-            Menu menu = new Menu(selectedIndexMenu: 0);
+            Menu menu = new Menu();
 
             //Mise en page dynamique du menu principal
             menu.ChangeBackColorConsole(menu.Options);
 
-            
-
             //Appel de la méthode pour naviguer dans les menus
             menu.UserinputMenu();
-
-
-
-
-
-            //Thread gameThread = new Thread(game.Run);
-            //gameThread.SetApartmentState(ApartmentState.STA); // Définit le thread en mode STA
-            //gameThread.Start();
-
-            //gameThread.Join(); // Attend la fin de l'exécution du thread de jeu
         }
     }
 }

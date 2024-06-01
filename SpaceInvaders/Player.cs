@@ -1,17 +1,11 @@
-﻿///**************************************************************************************
-///ETML
+﻿///ETML
 ///Auteur : Omar Egal Ahmed
 ///Date : 18.01.2024
 ///Description : Création d'un programme de type jeu Scicy Invaders en mode Console. 
-///**************************************************************************************
+/// Descrition de classe: La classe Player est utilisée pour créer et gérer le personnage du joueur dans le jeu Space Invaders. Elle permet de déplacer le joueur sur l'écran, 
+/// de récupérer sa zone de collision pour la détection de collisions avec d'autres objets du jeu, et de le dessiner correctement sur la console.
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
 using System.Drawing;
-using System.Diagnostics;
 
 namespace SpaceInvaders
 {
@@ -39,7 +33,7 @@ namespace SpaceInvaders
 
 
         // Propriété Symbol : apparence du vaisseaux du vaisseaux du joueur.
-        private string _playersymbol = "<O>";
+        private string _playersymbol = "<ÔÔ>";
         public string Playersymbol { get { return _playersymbol; } private set { _playersymbol = value; } }
 
 
@@ -50,7 +44,7 @@ namespace SpaceInvaders
         public Player(int initialX)
         {
             X = initialX;
-            Y = Console.WindowHeight -1; // Juste au-dessus de la bordure inférieure
+            Y = Console.WindowHeight -2; // Juste au-dessus de la bordure inférieure
 
             OldX = 0;
             OldY = 0;
@@ -73,26 +67,23 @@ namespace SpaceInvaders
         /// <returns>Une Hitbox autour du joueur</returns>
         public Rectangle GetHitbox()
         {
-            return new Rectangle(X, Y, 3, 1); //Reectangle de taille 1 sur 1
+            return new Rectangle(X, Y, Playersymbol.Length, 1); //Reectangle de taille 1 sur 1
         }
 
         /// <summary>
         /// Méthode pour effacer les caractère 
         /// </summary>
-        public static class Helper
+        public static void Erase(int x, int y, int length)
         {
-            public static void Erase(int x, int y, int length)
-            {
-                Console.SetCursorPosition(x, y);
+            Console.SetCursorPosition(x, y);
 
-                // Efface les caractères à partir de la position spécifiée jusqu'à la longueur spécifiée
-                for (int i = 0; i < length; i++)
-                {
-                    Console.Write(" "); // Remplace chaque caractère par un espace vide
-                }
+            // Efface les caractères à partir de la position spécifiée jusqu'à la longueur spécifiée
+            for (int i = 0; i < length; i++)
+            {
+                Console.Write(" "); // Remplace chaque caractère par un espace vide
             }
         }
-
+        
         /// <summary>
         /// Méthode Draw : dessine le joueur à sa position actuelle sur la console
         /// </summary>
@@ -101,14 +92,30 @@ namespace SpaceInvaders
             // Efface l'ancienne position du joueur uniquement si elle a changé
             if (X > 0 && (OldX != X))
             {
-                Helper.Erase(OldX, OldY, Playersymbol.Length); // Efface un caractère à la position de l'ancien joueur
+                Erase(OldX, OldY, Playersymbol.Length); // Efface un caractère à la position de l'ancien joueur
+
+                for (int i = 0;i < Console.WindowWidth -5 ; i++)
+                {
+                    Console.SetCursorPosition(i, Y);
+                    Console.Write(" ");
+                }
+                
+
+                // Dessine le joueur à sa nouvelle position
+                Console.SetCursorPosition(X, Y);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write(Playersymbol);
+
                 OldX = X;
                 OldY = Y;
+            }
+        }
 
-                // Dessine le missile à sa nouvelle position
-                Console.SetCursorPosition(X, Y);
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.Write(Playersymbol);
+        public Game Game
+        {
+            get => default;
+            set
+            {
             }
         }
     }

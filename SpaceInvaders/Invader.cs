@@ -1,17 +1,11 @@
-﻿///**************************************************************************************
-///ETML
+﻿///ETML
 ///Auteur : Omar Egal Ahmed
 ///Date : 18.01.2024
 ///Description : Création d'un programme de type jeu Scicy Invaders en mode Console. 
-///**************************************************************************************
+/// Descrition de classe: La classe Invader est utilisée pour créer et gérer les envahisseurs dans le jeu Space Invaders. 
+/// Chaque instance de la classe représente un unique envahisseur. Les méthodes permettent de déplacer et de dessiner l'envahisseur sur la console en fonction de sa position.
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
 using System.Drawing;
-using System.Runtime.InteropServices;
 
 
 // Espace de noms SpaceInvaders
@@ -53,8 +47,22 @@ namespace SpaceInvaders
 
 
         // Propriété Symbol : apparence de l'envahisseur
-        private string _invaderSymbol = "X";
-        public string Playersymbol { get { return _invaderSymbol; } private set { _invaderSymbol = value; } }
+        private string _invaderSymbol = ">(*-*)<";
+        public string InvaderSymbol { get { return _invaderSymbol; }  set { _invaderSymbol = value; } }
+
+        // Propriété Symbol : apparence de l'envahisseur
+        private string _invaderSecondsymbol = "<|§¦§¦>";
+        public string InvaderSecondsymbol { get { return _invaderSecondsymbol; } set { _invaderSecondsymbol = value; } }
+
+        // Propriété Symbol : apparence de l'envahisseur
+        private string _invaderThirdsymbol = "(°)-(°)";
+        public string InvaderThirdsymbol { get { return _invaderThirdsymbol; } set { _invaderThirdsymbol = value; } }
+
+
+
+        // Propriété Symbol : apparence de l'envahisseur Amiral
+        private string _invaderBosssymbol = "|ÔÔ|";
+        public string InvaderBosssymbol { get { return _invaderBosssymbol; } private set { _invaderBosssymbol = value; } }
 
 
         // Propriété IsActivate : L'etat de l'ennemi
@@ -84,7 +92,6 @@ namespace SpaceInvaders
 
             OldX = 10;
             OldY = 0;
-
         }
 
         /// <summary>
@@ -95,7 +102,7 @@ namespace SpaceInvaders
             _currentNumberofInvaders = numberOfinvaders;
 
             // Vérifie si l'envahisseur est actif avant de le déplacer
-            if (IsActive)
+            if (IsActive || InvaderSymbol == _invaderBosssymbol)
             {
                 // Vérifie la direction de déplacement (gauche ou droite)
                 if (!_leftOrRight) // Si leftOrRight est false, l'envahisseur se déplace vers la droite
@@ -108,36 +115,44 @@ namespace SpaceInvaders
                     X--; // Déplace l'envahisseur d'une unité vers la gauche
                     _down = false;
                 }
-
-
-
                 
                 {
                     // Vérifie si l'envahisseur atteint le bord droit de la console
                     if (X == Console.WindowWidth - 10)
                     {
-                        
-                        
                         _down = true;
                         //_leftOrRight = true; // Change la direction de déplacement vers la gauche
                     }
                     // Vérifie si l'envahisseur atteint le bord gauche de la console
                     else if (X == 5)
                     {
-                        
-                        
                         _down = true;
                         //_leftOrRight = false; // Change la direction de déplacement vers la droite
                     }
-
-
                 }
-
             }
-
             return _down;
         }
 
+        public bool MoveinvaderBoss()
+        {
+
+            // Vérifie si le envahisseur Amiral ne sort pas de l'écran vers la gauche
+            if (X > 0)
+            {
+                X--;
+            }
+            else
+            {
+                IsActive = false; // Désactive le missile s'il sort de l'écran
+
+
+            }
+                
+            
+
+            return IsActive;
+        }
 
         /// <summary>
         /// Méthode Draw : dessine l'envahisseur à sa position actuelle sur la console
@@ -167,43 +182,71 @@ namespace SpaceInvaders
                     // Efface l'ancienne position du joueur uniquement si elle a changé
                     if (X > 0 && Y > 0 && (OldX != X || OldY != Y))
                     {
-                        Helper.Erase(OldX, OldY, Playersymbol.Length); // Efface un caractère à la position de l'ancien joueur
+                        Erase(OldX, OldY, InvaderSymbol.Length); // Efface un caractère à la position de l'ancien joueur
                         OldX = X;
                         OldY = Y;
 
                         // Dessine le missile à sa nouvelle position
                         Console.SetCursorPosition(X, Y);
+
+                        // Couleur pour les vaisseaux générique
                         Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.Write(Playersymbol);
+
+                        
+                        Console.Write(InvaderSymbol);// Affiche l'envahisseur
                     }
                 }
             }
         }
 
+
+        public void DrawbossInvader()
+        {
+            // Efface l'ancienne position du joueur uniquement si elle a changé
+            if (X > 0 && (OldX != X))
+            {
+                Erase(OldX, OldY, InvaderSymbol.Length); // Efface un caractère à la position de l'ancien joueur
+
+                for (int i = 0; i < Console.WindowWidth - 5; i++)
+                {
+                    Console.SetCursorPosition(i, Y);
+                    Console.Write(" ");
+                }
+
+
+                // Dessine le missile à sa nouvelle position
+                Console.SetCursorPosition(X, Y);
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.Write(InvaderSymbol);
+
+                OldX = X;
+                OldY = Y;
+            }
+        }
+
         /// <summary>
-        /// 
+        /// Méthode pour effacer les dernieres positions des envahisseurs.
         /// </summary>
         public void Drawfinalposiion()
         {
-            Helper.Erase(OldX, OldY, Playersymbol.Length); // Efface un caractère à la position de l'ancien joueur  
+            Erase(OldX, OldY, InvaderSymbol.Length); // Efface un caractère à la position de l'ancien joueur  
         }
 
         /// <summary>
         /// Méthode pour effacer les caractère 
         /// </summary>
-        public static class Helper
+        public static void Erase(int x, int y, int length)
         {
-            public static void Erase(int x, int y, int length)
-            {
-                Console.SetCursorPosition(x, y);
+            Console.SetCursorPosition(x, y);
 
-                // Efface les caractères à partir de la position spécifiée jusqu'à la longueur spécifiée
-                for (int i = 0; i < length; i++)
-                {
-                    Console.Write(" "); // Remplace chaque caractère par un espace vide
-                }
+            // Efface les caractères à partir de la position spécifiée jusqu'à la longueur spécifiée
+            for (int i = 0; i < length; i++)
+            {
+                Console.Write(" "); // Remplace chaque caractère par un espace vide
             }
         }
+
+        
 
         /// <summary>
         /// Méthode pour obtenir la hitbox de l'envahisseur
@@ -212,7 +255,7 @@ namespace SpaceInvaders
         public Rectangle GetHitbox()
         {
             // Retourne un rectangle autour de l'envahisseur pour détecter les collisions
-            return new Rectangle(X, Y, 4, 3); // Modifier les dimensions selon la taille de l'envahisseur
+            return new Rectangle(X, Y, InvaderSymbol.Length, 3); // Modifier les dimensions selon la taille de l'envahisseur
         }
 
         internal Game Game
