@@ -2,7 +2,7 @@
 ///Auteur : Omar Egal Ahmed
 ///Date : 18.01.2024
 ///Description : Création d'un programme de type jeu Scicy Invaders en mode Console. 
-///
+///Classe Program : Point d'entrée du programme.
 using SpaceInvaders;
 using System;
 using System.Runtime.CompilerServices;
@@ -12,8 +12,7 @@ using System.Runtime.CompilerServices;
 // Espace de noms SpicyInva der
 namespace SpicyInvader
 {
-    // Classe Program : Point d'entrée du programme
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -25,6 +24,8 @@ namespace SpicyInvader
 
             // Disable vertical scrolling
             Console.SetBufferSize(Console.WindowWidth, Console.WindowHeight);
+
+
 
             //Instanciation d'un nouvelle objet Menu 
             Menu menu = new Menu();

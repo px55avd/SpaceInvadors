@@ -12,45 +12,69 @@ namespace SpaceInvaders
     public class Bunker
     {
 
-        // Propriétés pour la position et l'état du bunker
+        /// <summary>
+        /// Propriétés pour la position et l'état du bunker
+        /// </summary>
         private int _x;
+
+        /// <summary>
+        /// Propriétés publique pour la position et l'état du bunker
+        /// </summary>
         public int X { get {return _x;} private set { _x = value; } }
 
-        // Champ privé pour stocker la coordonnée Y
+        /// <summary>
+        /// Champ privé pour stocker la coordonnée Y
+        /// </summary>
         private int _y;
 
-        // Propriété publique pour accéder à la coordonnée Y
-        // Le setter est privé, donc seul la classe peut modifier cette valeur
+        /// <summary>
+        /// Propriété publique pour accéder à la coordonnée Y
+        /// Le setter est privé, donc seul la classe peut modifier cette valeur
+        /// </summary>     
         public int Y
         {
             get { return _y; }
+
+           
             private set { _y = value; }
         }
 
-        // Champ privé pour indiquer si le bunker est endommagé
+        /// <summary>
+        /// Champ privé pour indiquer si le bunker est endommagé
+        /// </summary>
         private bool _damaged;
 
-        // Propriété publique pour accéder et modifier l'état d'endommagement du bunker
+        /// <summary>
+        /// Propriété publique pour accéder et modifier l'état d'endommagement du bunker
+        /// </summary>
         public bool Damaged
         {
             get { return _damaged; }
             set { _damaged = value; }
         }
 
-        // Champ privé pour le symbole du bunker
+        /// <summary>
+        /// Champ privé pour le symbole du bunker
+        /// </summary>
         private string _bunkerSymbol = "X";
 
-        // Propriété publique pour accéder et modifier le symbole du bunker
+        /// <summary>
+        /// Propriété publique pour accéder et modifier le symbole du bunker
+        /// </summary>
         public string BunkerSymbol
         {
             get { return _bunkerSymbol; }
             set { _bunkerSymbol = value; }
         }
 
-        // Champ privé pour le symbole d'un bunker endommagé
+        /// <summary>
+        /// Champ privé pour le symbole d'un bunker endommagé
+        /// </summary>
         private string _damagedBunkerSymbol = "/";
 
-        // Propriété publique pour accéder et modifier le symbole d'un bunker endommagé
+        /// <summary>
+        /// Propriété publique pour accéder et modifier le symbole d'un bunker endommagé
+        /// </summary>
         public string DamagedBunkerSymbol
         {
             get { return _damagedBunkerSymbol; }

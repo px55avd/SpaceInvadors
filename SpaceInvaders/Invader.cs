@@ -8,76 +8,134 @@ using System;
 using System.Drawing;
 
 
-// Espace de noms SpaceInvaders
 namespace SpaceInvaders
 {
-    // Classe Invader : représente un envahisseur dans le jeu SpaceInvaders
     public class Invader
     {
-        //Instantiation d'un objet Ramdom
-        Random random = new Random();
-
-        // Instantiation d'un bool pour controler la si les ennemi se déplace à gauche ou à droite
+        /// <summary>
+        /// Propriété privée pour contrôler si les ennemis se déplacent à gauche ou à droite
+        /// </summary>
         private bool _leftOrRight = false;
+
+        /// <summary>
+        /// Propriété publique pour accéder et définir la direction de déplacement des ennemis
+        /// </summary>
         public bool LeftorRight { get { return _leftOrRight; } set { _leftOrRight = value; } }
 
-        // Instantiation d'un bool pour controler la si les ennemi se déplace à gauche ou à droite
+        /// <summary>
+        /// Propriété privée pour contrôler si les ennemis se déplacent vers le bas
+        /// </summary>
         private bool _down = false;
+
+        /// <summary>
+        /// Propriété publique pour accéder et définir le déplacement vers le bas des ennemis
+        /// </summary>
         public bool Down { get { return _down; } set { _down = value; } }
 
-
-        // Propriété X : position horizontale de l'envahisseur
+        /// <summary>
+        /// Propriété privée pour la position horizontale de l'envahisseur
+        /// </summary>
         private int _x;
+
+        /// <summary>
+        /// Propriété publique pour accéder et définir la position horizontale de l'envahisseur
+        /// </summary>
         public int X { get { return _x; } private set { _x = value; } }
 
-
-        // Propriété Y : position verticale de l'envahisseur
+        /// <summary>
+        /// Propriété privée pour la position verticale de l'envahisseur
+        /// </summary>
         private int _y;
-        public int Y { get { return _y; }  set { _y = value; } }
 
+        /// <summary>
+        /// Propriété publique pour accéder et définir la position verticale de l'envahisseur
+        /// </summary>
+        public int Y { get { return _y; } set { _y = value; } }
 
-        // Propriété OldX : ancienne position horizontale de l'envahisseur
+        /// <summary>
+        /// Propriété privée pour l'ancienne position horizontale de l'envahisseur
+        /// </summary>
         private int _oldX = 0;
+
+        /// <summary>
+        /// Propriété publique pour accéder et définir l'ancienne position horizontale de l'envahisseur
+        /// </summary>
         public int OldX { get { return _oldX; } private set { _oldX = value; } }
 
-
-        // Propriété OldY : ancienne position verticale de l'envahisseur
+        /// <summary>
+        /// Propriété privée pour l'ancienne position verticale de l'envahisseur
+        /// </summary>
         private int _oldY = 0;
+
+        /// <summary>
+        /// Propriété publique pour accéder et définir l'ancienne position verticale de l'envahisseur
+        /// </summary>
         public int OldY { get { return _oldY; } private set { _oldY = value; } }
 
-
-        // Propriété Symbol : apparence de l'envahisseur
+        /// <summary>
+        /// Propriété privée pour le symbole représentant l'envahisseur
+        /// </summary>
         private string _invaderSymbol = ">(*-*)<";
-        public string InvaderSymbol { get { return _invaderSymbol; }  set { _invaderSymbol = value; } }
 
-        // Propriété Symbol : apparence de l'envahisseur
+        /// <summary>
+        /// Propriété publique pour accéder et définir le symbole de l'envahisseur
+        /// </summary>
+        public string InvaderSymbol { get { return _invaderSymbol; } set { _invaderSymbol = value; } }
+
+        /// <summary>
+        /// Propriété privée pour le deuxième symbole représentant l'envahisseur
+        /// </summary>
         private string _invaderSecondsymbol = "<|§¦§¦>";
+
+        /// <summary>
+        /// Propriété publique pour accéder et définir le deuxième symbole de l'envahisseur
+        /// </summary>
         public string InvaderSecondsymbol { get { return _invaderSecondsymbol; } set { _invaderSecondsymbol = value; } }
 
-        // Propriété Symbol : apparence de l'envahisseur
+        /// <summary>
+        /// Propriété privée pour le troisième symbole représentant l'envahisseur
+        /// </summary>
         private string _invaderThirdsymbol = "(°)-(°)";
+
+        /// <summary>
+        /// Propriété publique pour accéder et définir le troisième symbole de l'envahisseur
+        /// </summary>
         public string InvaderThirdsymbol { get { return _invaderThirdsymbol; } set { _invaderThirdsymbol = value; } }
 
-
-
-        // Propriété Symbol : apparence de l'envahisseur Amiral
+        /// <summary>
+        /// Propriété privée pour le symbole représentant l'envahisseur Amiral
+        /// </summary>
         private string _invaderBosssymbol = "|ÔÔ|";
+
+        /// <summary>
+        /// Propriété publique pour accéder et définir le symbole de l'envahisseur Amiral
+        /// </summary>
         public string InvaderBosssymbol { get { return _invaderBosssymbol; } private set { _invaderBosssymbol = value; } }
 
-
-        // Propriété IsActivate : L'etat de l'ennemi
+        /// <summary>
+        /// Propriété privée pour indiquer si l'envahisseur est actif
+        /// </summary>
         private bool _isActivate;
+
+        /// <summary>
+        /// Propriété publique pour accéder et définir l'état de l'envahisseur
+        /// </summary>
         public bool IsActive { get { return _isActivate; } set { _isActivate = value; } }
 
-        // Propriété X : position horizontale de l'envahisseur
+        /// <summary>
+        /// Propriété privée pour compter le nombre d'envahisseurs
+        /// </summary>
         private int _count = 0;
+
+        /// <summary>
+        /// Propriété publique pour accéder et définir le nombre d'envahisseurs
+        /// </summary>
         public int Count { get { return _count; } private set { _count = value; } }
 
+        /// <summary>
+        /// Propriété privée pour le nombre actuel d'envahisseurs
+        /// </summary>
         private int _currentNumberofInvaders = 0;
-
-
-
-
 
 
         /// <summary>
@@ -134,23 +192,25 @@ namespace SpaceInvaders
             return _down;
         }
 
+        /// <summary>
+        /// Méthode pour déplacer l'envahisseur Amiral.
+        /// </summary>
+        /// <returns>Retourne true si l'envahisseur est actif, false sinon.</returns>
         public bool MoveinvaderBoss()
         {
-
-            // Vérifie si le envahisseur Amiral ne sort pas de l'écran vers la gauche
+            // Vérifie si l'envahisseur Amiral ne sort pas de l'écran vers la gauche
             if (X > 0)
             {
+                // Déplace l'envahisseur Amiral d'une position vers la gauche
                 X--;
             }
             else
             {
-                IsActive = false; // Désactive le missile s'il sort de l'écran
-
-
+                // Désactive l'envahisseur Amiral s'il sort de l'écran
+                IsActive = false;
             }
-                
-            
 
+            // Retourne l'état de l'envahisseur Amiral (actif ou non)
             return IsActive;
         }
 
@@ -199,26 +259,30 @@ namespace SpaceInvaders
             }
         }
 
-
-        public void DrawbossInvader()
+        /// <summary>
+        /// Méthode pour dessiner l'envahisseur Amiral sur la console.
+        /// </summary>
+        public void DrawBossInvader()
         {
-            // Efface l'ancienne position du joueur uniquement si elle a changé
+            // Efface l'ancienne position de l'envahisseur Amiral uniquement si elle a changé
             if (X > 0 && (OldX != X))
             {
-                Erase(OldX, OldY, InvaderSymbol.Length); // Efface un caractère à la position de l'ancien joueur
+                // Efface le symbole de l'envahisseur Amiral à sa position précédente
+                Erase(OldX, OldY, InvaderSymbol.Length);
 
+                // Efface la ligne entière où se trouve l'envahisseur Amiral pour préparer l'affichage à la nouvelle position
                 for (int i = 0; i < Console.WindowWidth - 5; i++)
                 {
                     Console.SetCursorPosition(i, Y);
                     Console.Write(" ");
                 }
 
-
-                // Dessine le missile à sa nouvelle position
+                // Dessine l'envahisseur Amiral à sa nouvelle position
                 Console.SetCursorPosition(X, Y);
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.Write(InvaderSymbol);
 
+                // Met à jour les anciennes positions pour la prochaine itération
                 OldX = X;
                 OldY = Y;
             }
@@ -245,8 +309,6 @@ namespace SpaceInvaders
                 Console.Write(" "); // Remplace chaque caractère par un espace vide
             }
         }
-
-        
 
         /// <summary>
         /// Méthode pour obtenir la hitbox de l'envahisseur

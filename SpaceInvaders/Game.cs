@@ -19,37 +19,70 @@ namespace SpaceInvaders
 {
     public class Game
     {
-        // Déclaration des champs de la classe
-        private int _playerPosition; // Position du joueur
+        /// <summary>
+        /// Position du joueur
+        /// </summary>
+        private int _playerPosition;
+
+        /// <summary>
+        /// Propriété publique pour accéder et définir la position du joueur
+        /// </summary>
         public int PlayerPosition
         {
             get { return _playerPosition; }
             set { _playerPosition = value; }
         }
 
-        private bool _gameOver; // Indique si le jeu est terminé
+        /// <summary>
+        /// Indique si le jeu est terminé
+        /// </summary>
+        private bool _gameOver;
+
+        /// <summary>
+        /// Propriété publique pour accéder et définir l'état de fin de jeu
+        /// </summary>
         public bool GameOver
         {
             get { return _gameOver; }
             set { _gameOver = value; }
         }
 
-        private int _playerLives; // nombre de vie du joueur
+        /// <summary>
+        /// Nombre de vies du joueur
+        /// </summary>
+        private int _playerLives;
+
+        /// <summary>
+        /// Propriété publique pour accéder et définir le nombre de vies du joueur
+        /// </summary>
         public int PlayerLives
         {
             get { return _playerLives; }
             set { _playerLives = value; }
         }
 
-
+        /// <summary>
+        /// Score du joueur
+        /// </summary>
         private int _score = 0;
+
+        /// <summary>
+        /// Propriété publique pour accéder et définir le score du joueur
+        /// </summary>
         public int Score
         {
             get { return _score; }
             set { _score = value; }
         }
 
-        private int _gameMode; // Indique si le mode jeu de la partie
+        /// <summary>
+        /// Indique le mode de jeu de la partie
+        /// </summary>
+        private int _gameMode;
+
+        /// <summary>
+        /// Propriété publique pour accéder et définir le mode de jeu
+        /// </summary>
         public int GameMode
         {
             get { return _gameMode; }
@@ -57,70 +90,128 @@ namespace SpaceInvaders
         }
 
         /// <summary>
-        /// Score du joueur
+        /// Vitesse du jeu
         /// </summary>
         private int _speedGame;
 
+        /// <summary>
+        /// Liste des envahisseurs
+        /// </summary>
+        private List<Invader> _invaders;
 
-        private List<Invader> _invaders; // Liste des envahisseurs
+        /// <summary>
+        /// Propriété publique pour accéder et définir la liste des envahisseurs
+        /// </summary>
         public List<Invader> Invaders
         {
             get { return _invaders; }
             set { _invaders = value; }
         }
 
-        private Player _player; // Le joueur
+        /// <summary>
+        /// Le joueur
+        /// </summary>
+        private Player _player;
+
+        /// <summary>
+        /// Propriété publique pour accéder et définir le joueur
+        /// </summary>
         public Player Player
         {
             get { return _player; }
             set { _player = value; }
         }
 
-        private Invader _invaderBoss;// l'envahisseur Amiral
+        /// <summary>
+        /// L'envahisseur Amiral
+        /// </summary>
+        private Invader _invaderBoss;
+
+        /// <summary>
+        /// Propriété publique pour accéder et définir l'envahisseur Amiral
+        /// </summary>
         public Invader InvaderBoss
         {
             get { return _invaderBoss; }
             set { _invaderBoss = value; }
         }
 
-        private List<Rocket> _rockets; // Liste des missiles tirés par le joueur
+        /// <summary>
+        /// Liste des missiles tirés par le joueur
+        /// </summary>
+        private List<Rocket> _rockets;
+
+        /// <summary>
+        /// Propriété publique pour accéder et définir la liste des missiles tirés par le joueur
+        /// </summary>
         public List<Rocket> Rockets
         {
             get { return _rockets; }
             set { _rockets = value; }
         }
 
-        private List<Rocket> _invadersRockets; //Liste des missile tirés par les invaders
+        /// <summary>
+        /// Liste des missiles tirés par les envahisseurs
+        /// </summary>
+        private List<Rocket> _invadersRockets;
+
+        /// <summary>
+        /// Propriété publique pour accéder et définir la liste des missiles tirés par les envahisseurs
+        /// </summary>
         public List<Rocket> InvadersRockets
         {
             get { return _invadersRockets; }
             set { _invadersRockets = value; }
         }
 
+        /// <summary>
+        /// Liste des bunkers
+        /// </summary>
         private List<Bunker> _bunkers;
+
+        /// <summary>
+        /// Propriété publique pour accéder et définir la liste des bunkers
+        /// </summary>
         public List<Bunker> Bunkers
         {
             get { return _bunkers; }
             set { _bunkers = value; }
         }
 
-        // Copie de la liste des envahisseurs pour éviter les modifications concurrentes
+        /// <summary>
+        /// Copie de la liste des envahisseurs pour éviter les modifications concurrentes
+        /// </summary>
         private List<Invader> _invadersCopy;
 
+        /// <summary>
+        /// Copie de la liste des missiles tirés par le joueur pour éviter les modifications concurrentes
+        /// </summary>
         private List<Rocket> _rocketsCopy;
+
+        /// <summary>
+        /// Propriété publique pour accéder et définir la copie de la liste des missiles tirés par le joueur
+        /// </summary>
         public List<Rocket> RocketsCopy
         {
             get { return _rocketsCopy; }
             set { _rocketsCopy = value; }
         }
 
+        /// <summary>
+        /// Copie de la liste des missiles tirés par les envahisseurs pour éviter les modifications concurrentes
+        /// </summary>
         private List<Rocket> _invadersRocketsCopy;
+
+        /// <summary>
+        /// Propriété publique pour accéder et définir la copie de la liste des missiles tirés par les envahisseurs
+        /// </summary>
         public List<Rocket> InvadersRocketsCopy
         {
             get { return _invadersRocketsCopy; }
-            set { _invadersRocketsCopy = value;}
+            set { _invadersRocketsCopy = value; }
         }
-        
+
+
         /// <summary>
         /// Constructeur de la classe Game
         /// </summary>
@@ -187,11 +278,12 @@ namespace SpaceInvaders
             }
 
             // Affiche un message de fin de jeu lorsque le jeu est terminé
-            Console.SetCursorPosition(0, Console.WindowHeight - 1); 
+            Console.SetCursorPosition(0, Console.WindowHeight - 1);
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Game Over! Press any key to exit...");
             Console.ReadKey();
         }
+
 
         /// <summary>
         /// Méthode pour mettre à jour l'état du jeu
@@ -519,7 +611,7 @@ namespace SpaceInvaders
                 soFarboss = _invaderBoss.MoveinvaderBoss();//Déplace le vaisseau amiral
 
                 // Dessine l'envahisseur Amiral
-                _invaderBoss.DrawbossInvader();
+                _invaderBoss.DrawBossInvader();
 
                 //Condition si le missile sort de l'écran.
                 if (soFarboss is false)

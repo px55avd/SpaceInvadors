@@ -6,36 +6,88 @@
 /// de récupérer sa zone de collision pour la détection de collisions avec d'autres objets du jeu, et de le dessiner correctement sur la console.
 using System;
 using System.Drawing;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleToAttribute("TestunitSpaceinvader")] // Accès de classe au test unitaire. 
 
 namespace SpaceInvaders
 {
-    // Classe Player : représente le joueur dans le jeu SpaceInvaders
     public class Player
     {
-        // Propriété X : position horizontale du vaisseaux du joueur.
+        /// <summary>
+        /// Propriété X : position horizontale du vaisseau du joueur.
+        /// </summary>
         private int _x;
-        public int X { get { return _x; } private set { _x = value; } }
 
+        /// <summary>
+        /// Propriété publique pour accéder à la position horizontale du vaisseau.
+        /// La définition est privée pour empêcher la modification extérieure.
+        /// </summary>
+        public int X
+        {
+            get { return _x; }
+            private set { _x = value; }
+        }
 
-        // Propriété Y : position verticale du vaisseaux du joueur.
+        /// <summary>
+        /// Propriété Y : position verticale du vaisseau du joueur.
+        /// </summary>
         private int _y;
-        public int Y { get { return _y; } private set { _y = value; } }
 
+        /// <summary>
+        /// Propriété publique pour accéder à la position verticale du vaisseau.
+        /// La définition est privée pour empêcher la modification extérieure.
+        /// </summary>
+        public int Y
+        {
+            get { return _y; }
+            private set { _y = value; }
+        }
 
-        // Propriété OldX : ancienne position horizontale du vaisseaux du joueur.
+        /// <summary>
+        /// Propriété OldX : ancienne position horizontale du vaisseau du joueur.
+        /// </summary>
         private int _oldX = 0;
-        public int OldX { get { return _oldX; } private set { _oldX = value; } }
 
+        /// <summary>
+        /// Propriété publique pour accéder à l'ancienne position horizontale du vaisseau.
+        /// La définition est privée pour empêcher la modification extérieure.
+        /// </summary>
+        public int OldX
+        {
+            get { return _oldX; }
+            private set { _oldX = value; }
+        }
 
-        // Propriété OldY : ancienne position verticaledu vaisseaux du joueur.
+        /// <summary>
+        /// Propriété OldY : ancienne position verticale du vaisseau du joueur.
+        /// </summary>
         private int _oldY = 0;
-        public int OldY { get { return _oldY; } private set { _oldY = value; } }
 
+        /// <summary>
+        /// Propriété publique pour accéder à l'ancienne position verticale du vaisseau.
+        /// La définition est privée pour empêcher la modification extérieure.
+        /// </summary>
+        public int OldY
+        {
+            get { return _oldY; }
+            private set { _oldY = value; }
+        }
 
-        // Propriété Symbol : apparence du vaisseaux du vaisseaux du joueur.
-        private string _playersymbol = "<ÔÔ>";
-        public string Playersymbol { get { return _playersymbol; } private set { _playersymbol = value; } }
+        /// <summary>
+        /// Propriété Symbol : apparence du vaisseau du joueur.
+        /// </summary>
+        private string _playersymbol = "<Ô>";
 
+        /// <summary>
+        /// Propriété publique pour accéder à l'apparence du vaisseau.
+        /// La définition est privée pour empêcher la modification extérieure.
+        /// </summary>
+        public string Playersymbol
+        {
+            get { return _playersymbol; }
+            private set { _playersymbol = value; }
+        }
 
         /// <summary>
         /// Constructeur de la classe Player

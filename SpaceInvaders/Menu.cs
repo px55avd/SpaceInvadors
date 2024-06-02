@@ -15,32 +15,81 @@ namespace SpaceInvaders
 {
     public class Menu
     {
-        // Propriété publique pour accéder à l'indice sélectionné
+        /// <summary>
+        /// Propriété private pour accéder à l'indice sélectionné dans la classe Menu.cs
+        /// </summary>
         private int _selectedIndex = 0;
 
-        // Options du menu principal
-        private string[] _options = new string[]{ "Lancer une nouvelle partie", "Difficulté", "Son", "A propos", "Quitter" };
-        public string[] Options { get { return _options;} set { value = _options; } }
+        /// <summary>
+        /// Options du menu principal
+        /// </summary>
+        private string[] _options = new string[] { "Lancer une nouvelle partie", "Difficulté", "Son", "A propos", "Quitter" };
 
-        // Options du sous-menu Difficulté
-        private string[] _optionsForIndex1 = new string[] { "Facile", "Moyen", "Difficle", "Retour", "Quitter"};
-        public string[] OptionsForIndex1 { get { return _optionsForIndex1; } set { value = _optionsForIndex1; } }
+        /// <summary>
+        /// Propriété publique pour accéder aux options du menu principal
+        /// </summary>
+        public string[] Options
+        {
+            get { return _options; }
+            set { _options = value; }
+        }
 
-        // Options du sous-menu Son
-        private string[] _optionsForIndex2 = new string[] { "Activer", "Désactiver","Retour", "Quitter" };
-        public string[] OptionsForIndex2 { get { return OptionsForIndex2; } set { value = OptionsForIndex2; } }
+        /// <summary>
+        /// Options du sous-menu Difficulté
+        /// </summary>
+        private string[] _optionsForIndex1 = new string[] { "Facile", "Moyen", "Difficile", "Retour", "Quitter" };
 
-        // Options du sous-menu A propos
-        private string[] _optionsForIndex3 = new string[] {"Avoir les information du jeu","Quitter", "Retour"};
-        public string[] OptionsForIndex3 { get { return _optionsForIndex3; } set { value = _optionsForIndex3; } }
+        /// <summary>
+        /// Propriété publique pour accéder aux options du sous-menu Difficulté
+        /// </summary>
+        public string[] OptionsForIndex1
+        {
+            get { return _optionsForIndex1; }
+            set { _optionsForIndex1 = value; }
+        }
 
-        // Jeu à lancer
+        /// <summary>
+        /// Options du sous-menu Son
+        /// </summary>
+        private string[] _optionsForIndex2 = new string[] { "Activer", "Désactiver", "Retour", "Quitter" };
+
+        /// <summary>
+        /// Propriété publique pour accéder aux options du sous-menu Son
+        /// </summary>
+        public string[] OptionsForIndex2
+        {
+            get { return _optionsForIndex2; }
+            set { _optionsForIndex2 = value; }
+        }
+
+        /// <summary>
+        /// Options du sous-menu A propos
+        /// </summary>
+        private string[] _optionsForIndex3 = new string[] { "Avoir les informations du jeu", "Retour", "Quitter" };
+
+        /// <summary>
+        /// Propriété publique pour accéder aux options du sous-menu A propos
+        /// </summary>
+        public string[] OptionsForIndex3
+        {
+            get { return _optionsForIndex3; }
+            set { _optionsForIndex3 = value; }
+        }
+
+        /// <summary>
+        /// Jeu à lancer
+        /// </summary>
         private Game _game;
+
+        /// <summary>
+        /// Propriété publique pour accéder et définir le jeu
+        /// </summary>
         public Game Game
         {
             get { return _game; }
             set { _game = value; }
         }
+
 
         /// <summary>
         /// Constructeur de la classe Menu
@@ -172,13 +221,11 @@ namespace SpaceInvaders
 
                         ChangeBackColorConsole(_optionsForIndex3);
                     }
-
                     // Si l'option sélectionnée est "Quitter", sort de la boucle si le menu en cours est egal au tableau _option
                     if (_selectedIndex == 4 && menu == _options)
                     {
                         break;
                     }
-
                     // Si l'option sélectionnée est "Facile" et si le menu en cours est egal au tableau _optionsForIndex1
                     if (_selectedIndex == 0 && menu == _optionsForIndex1)
                     {
@@ -253,20 +300,20 @@ namespace SpaceInvaders
                     {
                         break;//Quitter
                     }
-
                     // Si l'option sélectionnée est "Info" et si le menu en cours est egal au tableau _optionsForIndex3
                     if (_selectedIndex == 0 && menu == _optionsForIndex3)
                     {
                         Console.WriteLine();
-                        Console.WriteLine("Vous êtes dans la matrice !");
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine("Bienvenue dans Space Invaders !\r\n\r\nPlongez dans l'action frénétique de ce jeu de tir classique où vous incarnez un courageux pilote spatial chargé de\ndéfendre la galaxie contre une invasion extraterrestre imminente. Affrontez des vagues incessantes d'envahisseurs\naliens, manœuvrez habilement à travers un champ de bataille interstellaire et montrez vos compétences en combat dans ce jeu rétro revisité pour une nouvelle génération de joueurs.");
                     }
-
                     // Si l'option sélectionnée est "Quitter" et si le menu en cours est egal au tableau _optionsForIndex3
                     if (_selectedIndex == 2 && menu == _optionsForIndex3)
                     {
                         break; // quitter
                     }
-
                     // Si l'option sélectionnée est "Retour" et si le menu en cours est egal au tableau _optionsForIndex3
                     if (_selectedIndex == 1 && menu == _optionsForIndex3)
                     {

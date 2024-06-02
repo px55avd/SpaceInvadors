@@ -12,48 +12,92 @@ using System.IO;
 
 namespace SpaceInvaders
 {
-    // Classe Rocket : représente un missile tiré par le joueur
     public class Rocket
     {
-
-        private int _x;
         /// <summary>
-        /// Propriété X : position horizontale du missile
+        /// Champ privé pour stocker la position horizontale du missile
         /// </summary>
-        public int X { get { return _x; } set { _x = value; } }
-        
-        
+        private int _x;
+
         /// <summary>
-        /// Propriété Y : position verticale du missile
+        /// Propriété publique X : position horizontale du missile
+        /// </summary>
+        public int X
+        {
+            get { return _x; }
+            set { _x = value; }
+        }
+
+        /// <summary>
+        /// Champ privé pour stocker la position verticale du missile
         /// </summary>
         private int _y;
-        public int Y { get { return _y; }  set { _y = value; } }
-       
-        
+
         /// <summary>
-        /// Propriété OldX : ancienne position horizontale du missile
+        /// Propriété publique Y : position verticale du missile
+        /// </summary>
+        public int Y
+        {
+            get { return _y; }
+            set { _y = value; }
+        }
+
+        /// <summary>
+        /// Champ privé pour stocker l'ancienne position horizontale du missile
         /// </summary>
         private int _oldX = 0;
-        public int OldX { get { return _oldX; } set { _oldX = value; } }
-        
-        
+
         /// <summary>
-        /// Propriété OldY : ancienne position verticale du missile
+        /// Propriété publique OldX : ancienne position horizontale du missile
+        /// </summary>
+        public int OldX
+        {
+            get { return _oldX; }
+            set { _oldX = value; }
+        }
+
+        /// <summary>
+        /// Champ privé pour stocker l'ancienne position verticale du missile
         /// </summary>
         private int _oldY = 0;
-        public int OldY { get { return _oldY; } private set { _oldY = value; } }
-       
-        
+
         /// <summary>
-        /// Propriété Symbol : apparence du missile
+        /// Propriété publique OldY : ancienne position verticale du missile
+        /// </summary>
+        public int OldY
+        {
+            get { return _oldY; }
+            private set { _oldY = value; }
+        }
+
+        /// <summary>
+        /// Champ privé pour stocker l'apparence du missile
         /// </summary>
         private string _rocketSymbol = "|";
-        public string Rocketsymbol { get { return _rocketSymbol; } private set { _rocketSymbol = value; } }
-        
-        
-        // Indique si le missile est actif (en vol) ou non
+
+        /// <summary>
+        /// Propriété publique Rocketsymbol : apparence du missile
+        /// </summary>
+        public string Rocketsymbol
+        {
+            get { return _rocketSymbol; }
+            private set { _rocketSymbol = value; }
+        }
+
+        /// <summary>
+        /// Champ privé pour indiquer si le missile est actif (en vol) ou non
+        /// </summary>
         private bool _isActivate;
-        public bool IsActive { get { return _isActivate; }  set { _isActivate = value; } }
+
+        /// <summary>
+        /// Propriété publique IsActive : indique si le missile est actif (en vol) ou non
+        /// </summary>
+        public bool IsActive
+        {
+            get { return _isActivate; }
+            set { _isActivate = value; }
+        }
+
 
         /// <summary>
         /// Constructeur de la classe Rocket
@@ -103,7 +147,7 @@ namespace SpaceInvaders
             // Vérifie si le missile ne sort pas de l'écran vers le haut
             if (Y > 0 )
             {
-                Y--;
+                Y--; // diminie la position verticale 
             }
             else
             {
@@ -161,7 +205,6 @@ namespace SpaceInvaders
             }
         }
         
-
         /// <summary>
         /// Méthode Draw : dessine le missile à sa position actuelle sur la console
         /// </summary>
@@ -169,15 +212,10 @@ namespace SpaceInvaders
         {
             if (IsActive is true)
             {
-                //Debug.WriteLine("X:" + X);
-                //Debug.WriteLine("Y:" + Y);
-
                 // Efface l'ancienne position du joueur uniquement si elle a changé
                 if (X > 0 && Y > 0 && (OldX != X || OldY != Y))
                 {
                     Erase(OldX, OldY, Rocketsymbol.Length); // Efface un caractère à la position de l'ancien joueur
-
-
 
                     // Dessine le missile à sa nouvelle position      
                     Console.SetCursorPosition(X, Y);
